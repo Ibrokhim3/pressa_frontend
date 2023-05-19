@@ -1,1 +1,2 @@
-SF pro display font ulandi
+SF pro display font ishlamadi 50/50
+How to use scss in react ? Compile, _container ? import fonts
