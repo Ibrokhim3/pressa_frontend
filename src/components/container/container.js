@@ -1,5 +1,5 @@
 import "./_container.scss";
 
-export const Container = ({ children }) => {
-  return <div className="container">{children}</div>;
+export const Container = ({ children, style }) => {
+  return <div style={style} className="container">{children}</div>;
 };

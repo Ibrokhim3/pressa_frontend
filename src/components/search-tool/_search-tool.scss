@@ -1,0 +1,26 @@
+.search-tool {
+  background: $white;
+  box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.search-tool__list {
+  display: flex;
+  padding: 25px 0px 25px 57px;
+}
+
+.search-tool__item {
+  @include flex-centring;
+}
+
+.search-tool__item-wrapper {
+  @include flex-centring;
+  padding: 13px 15px 13px 13px;
+}
+
+.search-tool__line {
+  width: 100px;
+  opacity: 0.2;
+  border: 1px solid $text-color;
+  transform: rotate(90deg);
+}

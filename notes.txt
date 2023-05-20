@@ -1,3 +1,6 @@
 SF pro display font ishlamadi 50/50
 How to use scss in react ? Compile, _container ? import fonts
 Search icon in search input   
+time tag search tool da - main page
+search-tool.js ul > li bolish kerakmi
+ul ni ichida span ishlatsa boladimi search tool ?

@@ -1,6 +1,12 @@
 @import "./generals";
 @import "./normalize";
 @import "./variables";
+@import "./mixins";
 @import "../../components/container/container";
 @import "../../components/header/header";
 @import "../../components/button/button";
+@import "../../pages/main-page/main-page";
+@import "../../components/title-text/title-text";
+@import "../../components/search-tool/search-tool";
+@import "../../components/icon-tool/icon-tool";
+@import "../../components/arrow-down/arrow-down";

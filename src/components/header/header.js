@@ -5,9 +5,9 @@ import "./_header.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import plusImg from "../../assets/icons/plus.svg";
 
-export const Header = () => {
+export const Header = ({ style }) => {
   return (
-    <header className="header">
+    <header style={style} className="header">
       <Container>
         <div className="header__div">
           <span className="header__logo">Pressa</span>
