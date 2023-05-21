@@ -3,4 +3,4 @@ export * from "./header";
 export * from "./button";
 export * from "./title-text";
 export * from "./search-tool";
-export * from "./icon-tool";
+export * from "./post-item";

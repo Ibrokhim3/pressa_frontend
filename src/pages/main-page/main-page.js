@@ -1,4 +1,11 @@
-import { Container, Header, SearchTool, TitleText } from "../../components";
+import {
+  Container,
+  Header,
+  SearchTool,
+  TitleText,
+  PostItem,
+  Button,
+} from "../../components";
 
 export const MainPage = () => {
   return (
@@ -12,6 +19,22 @@ export const MainPage = () => {
         <main>
           <section>
             <p className="main-page__status-text">Oxirgi e’lonlar</p>
+            <ul className="main-page__post-list">
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+              <PostItem />
+            </ul>
+            <Button
+              style={{ background: "#006AFF", margin: "0 auto 144px auto" }}
+            >
+              Ko’proq ko’rish
+            </Button>
           </section>
         </main>
       </Container>

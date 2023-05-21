@@ -5,3 +5,5 @@ time tag search tool da - main page
 search-tool.js ul > li bolish kerakmi
 ul ni ichida span ishlatsa boladimi search tool ?
 line qalin bolib qolid 2.13px 1px bolish kerek ? top main page
+header va p tag qaysi biri ? main-page
+post-item ichidagi iconlar joylashuvi ?

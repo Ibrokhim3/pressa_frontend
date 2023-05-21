@@ -10,3 +10,10 @@
   color: $text-color;
   margin-bottom: 50px;
 }
+
+.main-page__post-list {
+  display: flex;
+  gap: 29px;
+  flex-wrap: wrap;
+  margin-bottom: 68px;
+}
