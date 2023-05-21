@@ -2,3 +2,11 @@
   background: linear-gradient(265.48deg, #095acd 33.12%, #006aff 84.7%);
   height: 485px;
 }
+
+.main-page__status-text {
+  margin: 0;
+  font-weight: 500;
+  line-height: 29px;
+  color: $text-color;
+  margin-bottom: 50px;
+}

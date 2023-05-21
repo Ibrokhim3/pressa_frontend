@@ -8,7 +8,12 @@ export const MainPage = () => {
         <TitleText style={{ marginBottom: "94px" }}>
           Eng so’ngi master klasslar va tadbirlar bizning saytda
         </TitleText>
-        <SearchTool></SearchTool>
+        <SearchTool style={{ marginBottom: "149px" }}></SearchTool>
+        <main>
+          <section>
+            <p className="main-page__status-text">Oxirgi e’lonlar</p>
+          </section>
+        </main>
       </Container>
     </div>
   );
