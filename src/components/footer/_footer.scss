@@ -1,0 +1,36 @@
+.footer {
+  background: linear-gradient(265.48deg, #095acd 33.12%, #006aff 84.7%);
+  padding: 40px 0 33px 0;
+}
+
+.footer__logo {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  color: $white;
+  margin-right: auto;
+}
+.footer__wrapper {
+  @include flex-centring;
+}
+
+.footer__number {
+  font-family: "Ubuntu";
+  font-size: 18px;
+  line-height: 21px;
+  color: $white;
+}
+
+.footer__phone-icon {
+  margin-left: 124px;
+}
+
+.footer__number {
+  margin-left: 12px;
+}
+
+.footer__share-list {
+  @include flex-centring;
+  gap: 21px;
+  margin-left: 57px;
+}

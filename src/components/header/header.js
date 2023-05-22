@@ -4,6 +4,7 @@ import { Container } from "../container";
 import "./_header.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import plusImg from "../../assets/icons/plus.svg";
+import { Navbar } from "../navbar";
 
 export const Header = ({ style }) => {
   return (
@@ -18,14 +19,10 @@ export const Header = ({ style }) => {
             type="search"
           />
 
-          <ul className="header__navbar">
-            <li className="header__item">
-              <Link className="header__link">Biz haqimizda</Link>
-            </li>
-            <li className="header__item">
-              <Link className="header__link">Savol va javoblar</Link>
-            </li>
-          </ul>
+          <Navbar
+            ulStyle={{ gap: "40px" }}
+            navStyle={{ marginLeft: "103px" }}
+          ></Navbar>
           <Button style={{ marginLeft: "auto" }}>
             <img src={plusImg} alt="plus" />
             E’lon berish

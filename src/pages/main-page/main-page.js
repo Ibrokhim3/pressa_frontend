@@ -5,6 +5,7 @@ import {
   TitleText,
   PostItem,
   Button,
+  Footer,
 } from "../../components";
 
 import personInSuitWebp from "../../assets/images/img-bottom.webp";
@@ -12,16 +13,21 @@ import personInSuitWebp2x from "../../assets/images/img-bottom@2x.webp";
 import personInSuitPng from "../../assets/images/img-bottom.png";
 import personInSuitPng2x from "../../assets/images/img-bottom@2x.png";
 
+import personInSuit2Webp from "../../assets/images/img-bottom2.webp";
+import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
+import personInSuit2Png from "../../assets/images/img-bottom2.png";
+import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
+
 export const MainPage = () => {
   return (
     <div className="main-page__top">
       <Header style={{ marginBottom: "113px" }}></Header>
-      <Container>
+      <Container style={{ marginBottom: "129px" }}>
         <TitleText style={{ marginBottom: "94px" }}>
           Eng so’ngi master klasslar va tadbirlar bizning saytda
         </TitleText>
         <SearchTool style={{ marginBottom: "149px" }}></SearchTool>
-        <main>
+        <main className="main-page__main">
           <section className="main-page__posts-list">
             <p className="main-page__status-text">Oxirgi e’lonlar</p>
             <ul className="main-page__post-list">
@@ -57,22 +63,23 @@ export const MainPage = () => {
             </div>
             <div className="main-page__bottom-block">
               <h3 className="main-page__bottom-text">
-                E’LONLARINGIZNI BIZNI SAYTDA BERING
+                ENG SO’NGI MASTER KLASLAR BIZNING SAYTDA
               </h3>
               <picture className="main-page__picture-1">
                 <source
                   type="image/webp"
-                  srcSet={`${personInSuitWebp2x} 2x, ${personInSuitWebp} 1x`}
+                  srcSet={`${personInSuit2Webp2x} 2x, ${personInSuit2Webp} 1x`}
                 />
                 <img
                   type="image/png"
-                  srcSet={`${personInSuitPng2x} 2x, ${personInSuitPng} 1x`}
+                  srcSet={`${personInSuit2Png2x} 2x, ${personInSuit2Png} 1x`}
                 />
               </picture>
             </div>
           </section>
         </main>
       </Container>
+      <Footer></Footer>
     </div>
   );
 };
