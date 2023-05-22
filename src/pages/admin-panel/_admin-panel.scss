@@ -1,0 +1,154 @@
+.admin-panel {
+  margin-top: 17px;
+}
+
+.admin-panel__search-icon {
+  fill: $accent-color;
+}
+
+.admin-panel-container {
+  max-width: 1140px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.admin-panel__top-search {
+  display: flex;
+  align-items: center;
+}
+
+.admin-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 19px;
+}
+
+.admin-panel__search-input {
+  border: 0;
+  outline: none;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  color: #b9cad7;
+  margin-left: 13px;
+}
+
+.admin-panel__top-profile {
+  @include flex-centring;
+}
+
+.admin-panel__notif-wrapper {
+  position: relative;
+}
+
+.admin-panel__notif-icon {
+}
+
+.admin-panel__notif-red {
+  position: absolute;
+  right: -6px;
+  top: -3px;
+  z-index: 5;
+  @include flex-centring;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffff;
+}
+
+.admin-panel__username-wrapper {
+  @include flex-centring;
+  margin-left: 33px;
+}
+
+.admin-panel__username {
+  margin: 0 0 2px 0;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  color: #193951;
+}
+
+.admin-panel__user-id-wrapper {
+  @include flex-centring;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: 9px;
+}
+
+.admin-panel__user-id {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  color: #193951;
+
+  opacity: 0.3;
+}
+
+.admin-panel__line {
+  display: block;
+  border: 1px solid #ccd7e0;
+}
+
+.admin-panel__aside {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 18px 31px 27px 31px;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #016bff;
+  margin-right: 15px;
+}
+
+.admin-panel__logo {
+  margin: 0;
+
+  margin-bottom: 72px;
+}
+
+.admin-panel__logo-link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+  color: $white;
+  margin-bottom: 72px;
+}
+
+.admin-panel__setting-item {
+  margin-bottom: 37px;
+}
+
+.admin-panel__setting-link {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: $white;
+}
+
+.admin-panel__setting-list {
+  margin-bottom: auto;
+}
+
+.admin-panel__rights {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+
+  color: $white;
+}
