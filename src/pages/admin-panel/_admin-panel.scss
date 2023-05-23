@@ -97,6 +97,7 @@
 .admin-panel__line {
   display: block;
   border: 1px solid #ccd7e0;
+  margin-bottom: 30px;
 }
 
 .admin-panel__aside {
@@ -151,4 +152,84 @@
   line-height: 13px;
 
   color: $white;
+}
+
+//filter
+
+.admin-panel__filter-button {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  color: $white;
+  padding: 15px 25px;
+  background: #016bff;
+  border-radius: 50px;
+  border: 0;
+}
+
+.admin-panel__filter-button--uncheked {
+  background: transparent;
+  border: 0;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  color: #193951;
+  opacity: 0.4;
+}
+
+.admin-panel__filter-list {
+  display: flex;
+  align-items: center;
+}
+
+.admin-panel__filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-panel__filter-radio-list {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.admin-panel__filter-radio-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: $text-color;
+}
+
+.admin-panel__filter-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-panel__filter-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(51, 51, 51, 0.5);
+  display: grid;
+  place-content: center;
+
+  &::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: inset 1em 1em $accent-color; // will be visible on paper(while printing)
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+  }
+}
+
+.admin-panel__filter-radio:checked::before {
+  transform: scale(1);
 }

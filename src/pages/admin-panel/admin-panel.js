@@ -6,6 +6,7 @@ import trashIcon from "../../assets/icons/trash.svg";
 import settingsIcon from "../../assets/icons/settings.svg";
 import exitIcon from "../../assets/icons/exit-arrow.svg";
 import { Link } from "react-router-dom";
+import { Container } from "../../components/container/container";
 
 export const AdminPanel = () => {
   return (
@@ -50,7 +51,7 @@ export const AdminPanel = () => {
         </ul>
         <span className="admin-panel__rights">2023 All Rights</span>
       </div>
-      <div className="admin-panel-container">
+      <Container style={{ maxWidth: "1140px" }}>
         <div className="admin-panel__top">
           <div className="admin-panel__top-search">
             <svg
@@ -83,22 +84,71 @@ export const AdminPanel = () => {
             </div>
             <div className="admin-panel__profile-info">
               <div className="admin-panel__username-wrapper">
-                <img
-                  src={profileImg}
-                  width={44}
-                  height={44}
-                  alt="profile-image"
-                />
+                <Link>
+                  <img
+                    src={profileImg}
+                    width={44}
+                    height={44}
+                    alt="profile-image"
+                  />
+                </Link>
                 <div className="admin-panel__user-id-wrapper">
-                  <p className="admin-panel__username">Abbos Janizakov</p>
+                  <Link className="admin-panel__username">Abbos Janizakov</Link>
                   <span className="admin-panel__user-id">id:12432</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
       <span className="admin-panel__line"></span>
+      <Container style={{ maxWidth: "1140px" }}>
+        <Container style={{ maxWidth: "900px", marginLeft: "0", padding: "0" }}>
+          <div className="admin-panel__filter">
+            <ul className="admin-panel__filter-list">
+              <li className="admin-panel__filter-item">
+                <button className="admin-panel__filter-button">
+                  Kutilmoqda
+                </button>
+              </li>
+              <li className="admin-panel__filter-item">
+                <button className="admin-panel__filter-button admin-panel__filter-button--uncheked">
+                  Qabul qiligan
+                </button>
+              </li>
+              <li className="admin-panel__filter-item">
+                <button className="admin-panel__filter-button admin-panel__filter-button--uncheked">
+                  Rad etilgan
+                </button>
+              </li>
+            </ul>
+            <ul className="admin-panel__filter-radio-list">
+              <li className="admin-panel__filter-radio-item">
+                <label for="radio1" className="admin-panel__filter-radio-text">
+                  Oxirgilari
+                </label>
+                <input
+                  id="radio1"
+                  name="radio-trend"
+                  type="radio"
+                  className="admin-panel__filter-radio"
+                />
+              </li>
+              <li className="admin-panel__filter-radio-item">
+                <label for="radio2" className="admin-panel__filter-radio-text">
+                  Eng so’ngilari
+                </label>
+                <input
+                  id="radio2"
+                  name="radio-trend"
+                  type="radio"
+                  className="admin-panel__filter-radio"
+                />
+              </li>
+            </ul>
+          </div>
+        </Container>
+      </Container>
     </div>
   );
 };
