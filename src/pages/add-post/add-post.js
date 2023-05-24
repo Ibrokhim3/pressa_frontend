@@ -1,5 +1,6 @@
 import {
   Container,
+  Footer,
   Header,
   InputRadio,
   InputText,
@@ -116,7 +117,7 @@ export const AddPost = () => {
               value2={"Yuridik shaxs"}
             ></InputRadio>
             <div
-              style={{ marginBottom: "53px" }}
+              style={{ marginBottom: "53px", paddingBottom: "28px" }}
               className="add-post__form-group-wrapper"
             >
               <div className="add-post__form-personal-wrapper">
@@ -134,10 +135,59 @@ export const AddPost = () => {
                 </InputText>
               </div>
             </div>
-            <div className="add-post__form-group-wrapper"></div>
+            <div
+              style={{ paddingBottom: "21px" }}
+              className="add-post__form-group-wrapper"
+            >
+              <p className="add-post__form-text add-post__form-text-1">Post</p>
+              <input
+                placeholder="Mavzuni sarlavhasi"
+                className="add-post__form-post-input"
+                type="text"
+              />
+              <InputText
+                style={{ marginBottom: "41px", width: "100%" }}
+                inputStyle={{ width: "100%" }}
+                placeholder={"Description"}
+              >
+                Description
+              </InputText>
+              <label
+                style={{ marginBottom: "20px" }}
+                className="post-form-label"
+                htmlFor=""
+              >
+                Rasm yuklash
+                <input
+                  className="add-post__upload-input"
+                  type="file"
+                  accept="image/*"
+                />
+              </label>
+              <p className="add-post__upload-text">
+                Yuklanyotgan rasm o’lchami 1080x1080 hajmi 2 mb dan oshmasin
+              </p>
+              <label
+                style={{ marginBottom: "50px" }}
+                className="post-form-label"
+              >
+                Mavzu matni
+                <textarea
+                  className="add-post__form-textarea"
+                  placeholder="Mavzu matni"
+                ></textarea>
+              </label>
+              <button className="add-post__form-cancel-button">
+                Bekor qilish
+              </button>
+              <button className="add-post__form-submit-button">
+                E’lonni yuborish
+              </button>
+            </div>
           </form>
         </Container>
       </Container>
+      <Footer></Footer>
     </div>
   );
 };

@@ -138,3 +138,99 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+//post
+
+.add-post__form-text-1 {
+  margin-bottom: 18px;
+}
+
+.add-post__form-post-input {
+  font-family: "Bebas Neue";
+  border: none;
+  outline: none;
+  font-size: 32px;
+  line-height: 42px;
+  color: $text-color;
+  width: 100%;
+  margin-bottom: 86px;
+
+  &::placeholder {
+    opacity: 0.2;
+  }
+}
+
+//upload
+
+.add-post__upload-input {
+  &::file-selector-button {
+    border: none;
+    outline: none;
+    background: $accent-color;
+    border-radius: 3px;
+    padding: 16px 35px;
+    font-size: 14px;
+    line-height: 17px;
+    color: $white;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  &::file-selector-button:hover {
+    background: #01429cfe;
+  }
+}
+
+.add-post__upload-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 19px;
+  color: $accent-color;
+  margin-bottom: 61px;
+}
+
+.add-post__form-textarea {
+  padding: 17px;
+  width: 100%;
+  height: 245px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background-color: rgba($color: $text-color, $alpha: 0.1);
+  // resize: none;
+}
+
+.add-post__form-cancel-button {
+  padding: 17px 36px;
+  background: transparent;
+  opacity: 0.4;
+  border: 1px solid #b2bbc8;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #b2bbc8;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-right: 15px;
+
+  &:hover {
+    background: #7b818b;
+    color: $white;
+    border: 1px solid #cb0909;
+  }
+}
+
+.add-post__form-submit-button {
+  border: none;
+  padding: 17px 43px;
+  background: $accent-color;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 17px;
+  color: $white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background: #01429cfe;
+  }
+}
