@@ -21,7 +21,8 @@ import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
 export const MainPage = () => {
   return (
     <div className="main-page__top">
-      <Header style={{ marginBottom: "113px" }}></Header>
+      {/* shu yerda padding 22px / variable qilsa boladi scss*/}
+      <Header style={{ marginBottom: "calc(113px - 22px)" }}></Header>
       <Container style={{ marginBottom: "129px" }}>
         <TitleText style={{ marginBottom: "94px" }}>
           Eng so’ngi master klasslar va tadbirlar bizning saytda

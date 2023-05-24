@@ -6,3 +6,6 @@ line qalin bolib qolid 2.13px 1px bolish kerek ? top main page
 header va p tag qaysi biri ? main-page
 post-item ichidagi iconlar joylashuvi ?
 footer dan social media ichkariga kirib turish kk
+button ga mixin yoki defaul componente
+modern css site for css solutions 
+max-width berib bolmayapti inputarga

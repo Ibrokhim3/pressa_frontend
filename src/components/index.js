@@ -6,3 +6,6 @@ export * from "./search-tool";
 export * from "./post-item";
 export * from "./footer";
 export * from "./navbar";
+export * from "./page-name";
+export * from "./post-input";
+export * from "./select";

@@ -51,7 +51,7 @@ export const AdminPanel = () => {
         </ul>
         <span className="admin-panel__rights">2023 All Rights</span>
       </div>
-      <Container style={{ maxWidth: "1140px" }}>
+      <Container style={{ maxWidth: "1140px", marginBottom: "19px" }}>
         <div className="admin-panel__top">
           <div className="admin-panel__top-search">
             <svg
@@ -102,7 +102,7 @@ export const AdminPanel = () => {
         </div>
       </Container>
       <span className="admin-panel__line"></span>
-      <Container style={{ maxWidth: "1140px" }}>
+      <Container style={{ maxWidth: "1140px", marginBottom: "31px" }}>
         <Container style={{ maxWidth: "900px", marginLeft: "0", padding: "0" }}>
           <div className="admin-panel__filter">
             <ul className="admin-panel__filter-list">
@@ -147,6 +147,39 @@ export const AdminPanel = () => {
               </li>
             </ul>
           </div>
+        </Container>
+      </Container>
+      <span className="admin-panel__line"></span>
+      <Container style={{ maxWidth: "1140px" }}>
+        <Container style={{ maxWidth: "900px", marginLeft: "0", padding: "0" }}>
+          <p className="admin-panel__top-text">Eng so’ngi xabarnomalar</p>
+          <ul className="admin-panel__posts">
+            <li className="admin-panel__post-item">
+              <div className="admin-panel__post-top-wrapper">
+                <p className="admin-panel__post-item-text">
+                  Ux Ui dan masterklass o’tkazib yubormang Yoshlar telekanalida
+                </p>
+                <div className="admin-panel__buttons">
+                  <button className="admin-panel_cancel-button">
+                    Bekor qilish
+                  </button>
+                  <button className="admin-panel__submit-button">
+                    Tasdiqlash
+                  </button>
+                </div>
+              </div>
+              <ul className="admin-panel__info-list">
+                <li className="admin-panel__info-item admin-panel__info-item-1">
+                  Abbos Janizakov
+                </li>
+                <li className="admin-panel__info-item">+998 90 123-45-67</li>
+                <li className="admin-panel__info-item">30/01/2022</li>
+                <li className="admin-panel__info-item">15:00</li>
+                <li className="admin-panel__info-item">UI/UX dizayner</li>
+              </ul>
+              <span className="admin-panel__info-line"></span>
+            </li>
+          </ul>
         </Container>
       </Container>
     </div>

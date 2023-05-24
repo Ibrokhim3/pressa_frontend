@@ -21,7 +21,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 19px;
 }
 
 .admin-panel__search-input {
@@ -232,4 +231,84 @@
 
 .admin-panel__filter-radio:checked::before {
   transform: scale(1);
+}
+
+//posts-list
+
+.admin-panel__top-text {
+  margin: 0;
+  margin-bottom: 17px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+
+  color: #193951;
+}
+
+.admin-panel__post-top-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.admin-panel__post-item-text {
+  margin: 0;
+  width: 412px;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 27px;
+  color: #193951;
+}
+
+.admin-panel_cancel-button {
+  padding: 10px 18px;
+  border: 0;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #193951;
+  opacity: 0.8;
+  background: #d4e0e9;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-panel__submit-button {
+  padding: 10px 30px;
+  border: 0;
+  background: #0094ff;
+  border-radius: 4px;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: $white;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.admin-panel__info-list {
+  display: flex;
+  gap: 45px;
+  margin-bottom: 18px;
+}
+
+.admin-panel__info-item {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #0094ff;
+}
+
+.admin-panel__info-item-1 {
+  color: #193951;
+  opacity: 0.4;
+}
+
+.admin-panel__info-line {
+  display: block;
+  border: 1px solid #ccd7df;
+  margin-bottom: 17px;
 }
