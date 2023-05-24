@@ -7,6 +7,7 @@ import settingsIcon from "../../assets/icons/settings.svg";
 import exitIcon from "../../assets/icons/exit-arrow.svg";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/container/container";
+import { InputRadio } from "../../components";
 
 export const AdminPanel = () => {
   return (
@@ -122,30 +123,10 @@ export const AdminPanel = () => {
                 </button>
               </li>
             </ul>
-            <ul className="admin-panel__filter-radio-list">
-              <li className="admin-panel__filter-radio-item">
-                <label for="radio1" className="admin-panel__filter-radio-text">
-                  Oxirgilari
-                </label>
-                <input
-                  id="radio1"
-                  name="radio-trend"
-                  type="radio"
-                  className="admin-panel__filter-radio"
-                />
-              </li>
-              <li className="admin-panel__filter-radio-item">
-                <label for="radio2" className="admin-panel__filter-radio-text">
-                  Eng so’ngilari
-                </label>
-                <input
-                  id="radio2"
-                  name="radio-trend"
-                  type="radio"
-                  className="admin-panel__filter-radio"
-                />
-              </li>
-            </ul>
+            <InputRadio
+              value1={"Eng so’ngilari"}
+              value2={"Oxirgilari"}
+            ></InputRadio>
           </div>
         </Container>
       </Container>

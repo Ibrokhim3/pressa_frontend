@@ -5,4 +5,12 @@
   outline: none;
   border-radius: 3px;
   background: rgba($color: $text-color, $alpha: 0.1);
+  -moz-appearance: textfield; /* Firefox remove array*/
+
+  /* Chrome, Safari, Edge, Opera remove array*/
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }

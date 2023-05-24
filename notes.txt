@@ -12,3 +12,5 @@ max-width berib bolmayapti inputarga
 
 variable scss = background: rgba($color: $text-color, $alpha: 0.1);
 input-text componenti max-width issue
+
+input for ishlamadi input text da ?

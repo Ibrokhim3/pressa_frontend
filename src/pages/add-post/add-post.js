@@ -1,6 +1,7 @@
 import {
   Container,
   Header,
+  InputRadio,
   InputText,
   PageName,
   PostInput,
@@ -16,10 +17,8 @@ export const AddPost = () => {
         <Container style={{ maxWidth: "735px", padding: "0" }}>
           <p className="add-post-main-text">E’lon berish</p>
           <form className="add-post__form">
-            <div className="add-post__form-time-group">
-              <p className="add-post__form-time-text">
-                Vaqt va yo’nalishni tanlang
-              </p>
+            <div className="add-post__form-group-wrapper">
+              <p className="add-post__form-text">Vaqt va yo’nalishni tanlang</p>
               {/* <PostInput type={"date"}></PostInput> */}
               <div className="add-post__form-date-wrapper">
                 <label
@@ -101,12 +100,41 @@ export const AddPost = () => {
                     </div>
                   </div>
                 </label>
-                <label htmlFor="" className="post-form-label">
+
+                <InputText
+                  htmlFor={"input-link"}
+                  inputStyle={{ color: "#0085FF" }}
+                >
                   Link kiriting
-                  <InputText />
-                </label>
+                </InputText>
               </div>
             </div>
+            <p className="add-post__form-text">Tashkilotchi</p>
+            <InputRadio
+              style={{ marginBottom: "8px" }}
+              value1={"Jismoniy shaxs"}
+              value2={"Yuridik shaxs"}
+            ></InputRadio>
+            <div
+              style={{ marginBottom: "53px" }}
+              className="add-post__form-group-wrapper"
+            >
+              <div className="add-post__form-personal-wrapper">
+                <InputText style={{ marginBottom: "30px" }}>
+                  Ismi sharifi
+                </InputText>
+                <InputText style={{ marginBottom: "30px" }}>
+                  Professiya
+                </InputText>
+                <InputText max={"13"} inputType={"number"}>
+                  Telefon raqami
+                </InputText>
+                <InputText max={"13"} inputType={"number"}>
+                  Qo’shimcha tel raqam
+                </InputText>
+              </div>
+            </div>
+            <div className="add-post__form-group-wrapper"></div>
           </form>
         </Container>
       </Container>

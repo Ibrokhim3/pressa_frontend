@@ -5,13 +5,16 @@
   margin-bottom: 31px;
 }
 
-.add-post__form-time-group {
+.add-post__form-group-wrapper {
   padding: 40px 50px 55px 35px;
   border: 1px solid rgba(51, 51, 51, 0.1);
   border-radius: 2px;
+  margin-bottom: 89px;
 }
 
-.add-post__form-time-text {
+.add-post__form-text {
+  margin: 0;
+  margin-bottom: 30px;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
@@ -126,4 +129,12 @@
   font-size: 12px;
   line-height: 14px;
   cursor: pointer;
+}
+
+//personal information
+
+.add-post__form-personal-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
