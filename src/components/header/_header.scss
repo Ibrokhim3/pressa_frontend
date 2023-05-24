@@ -17,19 +17,29 @@
   color: #ffffff;
 }
 
+.header__search-input-label {
+  position: relative;
+  margin-left: 276px;
+  &::before {
+    content: url("../../assets/icons/search.svg");
+    position: absolute;
+    top: 12px;
+    left: 18px;
+  }
+}
+
 .header__search-input {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   width: 304px;
   height: 46px;
-  padding: 14px 0px 14px 18px;
+  padding: 14px 0px 14px 49px;
   outline: 0;
   color: #ffffff;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  margin-left: 276px;
 
   &::placeholder {
     font-weight: 400;

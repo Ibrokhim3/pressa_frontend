@@ -13,11 +13,17 @@ export const Header = ({ style }) => {
         <div className="header__div">
           <span className="header__logo">Pressa</span>
           {/* <img className="header__search-icon" src={searchIcon} alt="search" /> */}
-          <input
-            className="header__search-input"
-            placeholder="Izlash"
-            type="search"
-          />
+          <label
+            className="header__search-input-label"
+            htmlFor="header__search-input"
+          >
+            <input
+              id="header__search-input"
+              className="header__search-input"
+              placeholder="Izlash"
+              type="search"
+            />
+          </label>
 
           <Navbar
             ulStyle={{ gap: "40px" }}

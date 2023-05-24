@@ -14,3 +14,8 @@ variable scss = background: rgba($color: $text-color, $alpha: 0.1);
 input-text componenti max-width issue
 
 input for ishlamadi input text da ?
+
+//add-post page shortcomings
+
+input date, time not styled correctly, select-dropdown-menu not styled,
+telefone number can be add +998 and spaces to comfort, update input not styled correctly, 
