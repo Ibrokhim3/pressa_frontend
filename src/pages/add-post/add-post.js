@@ -10,6 +10,14 @@ import {
 } from "../../components";
 
 export const AddPost = () => {
+  const elModal = document.querySelector(".add-post__modal");
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    elModal.style.display = "block";
+  };
+
   return (
     <div className="add-post">
       <Header style={{ marginBottom: "42px" }}></Header>
@@ -17,7 +25,7 @@ export const AddPost = () => {
         <PageName>E’lon berish</PageName>
         <Container style={{ maxWidth: "735px", padding: "0" }}>
           <p className="add-post-main-text">E’lon berish</p>
-          <form className="add-post__form">
+          <form onSubmit={handleFormSubmit} className="add-post__form">
             <div className="add-post__form-group-wrapper">
               <p className="add-post__form-text">Vaqt va yo’nalishni tanlang</p>
               {/* <PostInput type={"date"}></PostInput> */}
@@ -180,7 +188,7 @@ export const AddPost = () => {
               <button className="add-post__form-cancel-button">
                 Bekor qilish
               </button>
-              <button className="add-post__form-submit-button">
+              <button type="submit" className="add-post__form-submit-button">
                 E’lonni yuborish
               </button>
             </div>
@@ -188,6 +196,25 @@ export const AddPost = () => {
         </Container>
       </Container>
       <Footer></Footer>
+      <div className="add-post__modal">
+        <div className="add-post__modal-content">
+          <span
+            className="add-post__modal-close"
+            onClick={() => (elModal.style.display = "none")}
+          ></span>
+          <p className="add-post__modal-header">Sizning e’loningiz yuborildi</p>
+          <p className="add-post__modal-text">
+            Yaqin soatlar ichda admin tomonidan tekshirib chiqladi va saytda
+            e’lon qilinadi!
+          </p>
+          <button
+            className="add-post__modal-button"
+            onClick={() => (elModal.style.display = "none")}
+          >
+            Ok
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
