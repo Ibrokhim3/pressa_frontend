@@ -64,7 +64,7 @@
   padding: 17px 25px 17px 17px;
 }
 
-.add-post__form-label {
+.post-form-label {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -76,6 +76,11 @@
 //input date
 
 //radio-button
+
+.add-post__form-type-wrapper {
+  display: flex;
+  gap: 30px;
+}
 
 .add-post__radio-wrapper {
   background: rgba($color: $text-color, $alpha: 0.1);
@@ -92,7 +97,7 @@
   position: relative;
 }
 
-.add-post__form-label-2,
+.add-post__form-label,
 .add-post__form-radio {
   display: flex;
   align-items: center;
@@ -115,42 +120,10 @@
   color: $white;
 }
 
-.add-post__form-label-2 {
+.add-post__form-label {
   color: $text-color;
   z-index: 90;
   font-size: 12px;
   line-height: 14px;
   cursor: pointer;
 }
-
-// .add-post__form-radio .add-post__form-radio {
-//   // -webkit-appearance: none;
-//   // appearance: none;
-//   // background-color: #fff;
-//   margin: 0;
-
-//   &::before {
-//     content: "";
-//     background-color: $accent-color;
-//     border-radius: 3px;
-//     transform: scale(0);
-//     cursor: pointer;
-//   }
-// }
-
-// .add-post__form-radio:checked::before {
-//   transform: scale(1);
-// }
-
-// .add-post__form-label-2 {
-//   flex-direction: row;
-// }
-
-// .add-post__radio-wrapper {
-//   display: flex;
-//   justify-content: space-between;
-//   background-color: rgba($color: $text-color, $alpha: 0.1);
-//   border-radius: 3px;
-//   max-width: 310px;
-//   padding: 17px 57px;
-// }

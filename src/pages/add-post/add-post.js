@@ -1,6 +1,7 @@
 import {
   Container,
   Header,
+  InputText,
   PageName,
   PostInput,
   Select,
@@ -42,7 +43,7 @@ export const AddPost = () => {
                 />
               </div>
               <div className="add-post__form-dir-wrapper">
-                <label className="add-post__form-label" htmlFor="dirSelect">
+                <label className="post-form-label" htmlFor="dirSelect">
                   Yo’nalishni belgilang
                   <Select id={"dirSelect"}>
                     <option className="option" value="">
@@ -53,7 +54,7 @@ export const AddPost = () => {
                     </option>
                   </Select>
                 </label>
-                <label className="add-post__form-label" htmlFor="innerDir">
+                <label className="post-form-label" htmlFor="innerDir">
                   Ichki yo’nalish
                   <Select id={"innerDir"}>
                     <option className="option" value="">
@@ -66,7 +67,7 @@ export const AddPost = () => {
                 </label>
               </div>
               <div className="add-post__form-type-wrapper">
-                <label className="add-post__form-label add-post__form-label-1">
+                <label className="post-form-label post-form-label-1">
                   Tadbir turi
                   <div className="add-post__radio-wrapper">
                     <div className="add-post__radio-button-wrapper">
@@ -78,7 +79,7 @@ export const AddPost = () => {
                         name="onlineOffline"
                       />
                       <label
-                        className="add-post__form-label-2"
+                        className="add-post__form-label"
                         htmlFor="onlineInput"
                       >
                         Online
@@ -92,13 +93,17 @@ export const AddPost = () => {
                         name="onlineOffline"
                       />
                       <label
-                        className="add-post__form-label-2"
+                        className="add-post__form-label"
                         htmlFor="offlineInput"
                       >
                         Offline
                       </label>
                     </div>
                   </div>
+                </label>
+                <label htmlFor="" className="post-form-label">
+                  Link kiriting
+                  <InputText />
                 </label>
               </div>
             </div>

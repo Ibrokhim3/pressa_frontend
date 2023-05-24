@@ -9,3 +9,4 @@ export * from "./navbar";
 export * from "./page-name";
 export * from "./post-input";
 export * from "./select";
+export * from "./input-text";
