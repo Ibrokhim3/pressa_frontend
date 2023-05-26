@@ -19,3 +19,8 @@ input for ishlamadi input text da ?
 
 input date, time not styled correctly, select-dropdown-menu not styled,
 telefone number can be add +998 and spaces to comfort, update input not styled correctly, 
+
+post-info page
+
+style top icon togri berilmadi
+koproq korish... margin ?

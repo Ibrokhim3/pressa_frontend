@@ -1,4 +1,4 @@
-import { AddPost, AdminPanel, LoginPage } from "./pages";
+import { AddPost, AdminPanel, LoginPage, PostInfo } from "./pages";
 import { MainPage } from "./pages/main-page/main-page";
 
 function App() {
@@ -7,7 +7,8 @@ function App() {
       {/* <MainPage></MainPage> */}
       {/* <LoginPage></LoginPage> */}
       {/* <AdminPanel></AdminPanel> */}
-      <AddPost></AddPost>
+      {/* <AddPost></AddPost> */}
+      <PostInfo></PostInfo>
     </div>
   );
 }

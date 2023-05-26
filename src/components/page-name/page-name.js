@@ -1,8 +1,8 @@
 import homeIcon from "../../assets/icons/home.svg";
 
-export const PageName = ({ children }) => {
+export const PageName = ({ children, style }) => {
   return (
-    <p className="add-post__page-name">
+    <p style={style} className="add-post__page-name">
       <img src={homeIcon} alt="home" />
       {children}
     </p>
