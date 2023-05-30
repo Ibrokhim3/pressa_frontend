@@ -5,8 +5,17 @@ import "./_header.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import plusImg from "../../assets/icons/plus.svg";
 import { Navbar } from "../navbar";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { postsAction } from "../../store";
 
 export const Header = ({ style }) => {
+  const dispatch = useDispatch();
+
+  const handleSearchChange = (evt) => {
+    dispatch(postsAction.setSearchValue(evt.target.value));
+  };
+
   return (
     <header style={style} className="header">
       <Container>
@@ -18,6 +27,7 @@ export const Header = ({ style }) => {
             htmlFor="header__search-input"
           >
             <input
+              onChange={handleSearchChange}
               id="header__search-input"
               className="header__search-input"
               placeholder="Izlash"
@@ -29,7 +39,7 @@ export const Header = ({ style }) => {
             ulStyle={{ gap: "40px" }}
             navStyle={{ marginLeft: "103px" }}
           ></Navbar>
-          <Button style={{ marginLeft: "auto" }}>
+          <Button to={"add-post"} style={{ marginLeft: "auto" }}>
             <img src={plusImg} alt="plus" />
             E’lon berish
           </Button>

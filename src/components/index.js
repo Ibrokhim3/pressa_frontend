@@ -11,3 +11,4 @@ export * from "./post-input";
 export * from "./select";
 export * from "./input-text";
 export * from "./input-radio";
+export * from "./checkbox";

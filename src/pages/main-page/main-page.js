@@ -17,8 +17,42 @@ import personInSuit2Webp from "../../assets/images/img-bottom2.webp";
 import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
 import personInSuit2Png from "../../assets/images/img-bottom2.png";
 import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { postsAction } from "../../store/posts";
+import { useDebounce } from "../../hooks/useDebounce";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 export const MainPage = () => {
+  const { list, loading, error, searchValue } = useSelector(
+    (state) => state.posts
+  );
+
+  const dispatch = useDispatch();
+
+  const debouncedValue = useDebounce(searchValue, 500);
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:2001/pressa/get-active-posts?${new URLSearchParams({
+        search: debouncedValue,
+      })}`
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        dispatch(postsAction.setList(data));
+        console.log(data);
+      })
+      .catch((err) => {
+        return console.log(err);
+      });
+  }, [debouncedValue]);
+
   return (
     <div className="main-page__top">
       {/* shu yerda padding 22px / variable qilsa boladi scss*/}
@@ -32,15 +66,10 @@ export const MainPage = () => {
           <section className="main-page__posts-list">
             <p className="main-page__status-text">Oxirgi e’lonlar</p>
             <ul className="main-page__post-list">
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
-              <PostItem />
+              {list?.map((item, index) => (
+                <PostItem key={index} item={item}></PostItem>
+              ))}
+              {/* <PostItem /> */}
             </ul>
             <Button style={{ background: "#006AFF", margin: "0 auto" }}>
               Ko’proq ko’rish

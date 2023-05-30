@@ -15,6 +15,11 @@ export const AddPost = () => {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
+    fetch("http://localhost:2000/pressa/test-upload", {
+      method: "POST",
+      headers: "Content-type",
+    });
+
     elModal.style.display = "block";
   };
 

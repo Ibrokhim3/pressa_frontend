@@ -24,3 +24,6 @@ post-info page
 
 style top icon togri berilmadi
 koproq korish... margin ?
+
+Search tooldagi dizayn muammolari
+Scss main .scss ext needed ?

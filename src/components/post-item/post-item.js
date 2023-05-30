@@ -7,20 +7,36 @@ import timeIcon from "../../assets/icons/post-time.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
 import { IconTool } from "../icon-tool";
 
-export const PostItem = () => {
+export const PostItem = ({
+  item: {
+    id,
+    isRejected,
+    postDate,
+    postTime,
+    postDir,
+    postInnerDir,
+    isModerated,
+    postDesc,
+    postImgUrl,
+    postTitle,
+    postType,
+    speakerJob,
+    speakerName,
+    speakerTelNum,
+    speakerTelNum2,
+  },
+}) => {
   return (
     <li className="post-item">
       <img
         className="post-item__post-img"
-        src={postImg}
+        src={postImgUrl}
         alt="post-image"
-        maxWidth={407}
-        maxHeight={417}
+        Width={407}
+        Height={417}
       />
       <div className="post-item__body">
-        <h3 className="post-item__title">
-          Alisher Isaevdan biznes va IT bo’yicha master klass
-        </h3>
+        <h3 className="post-item__title">{postTitle}</h3>
         <div className="post-item__list-wrapper">
           <ul className="post-item__list">
             <IconTool
@@ -36,7 +52,7 @@ export const PostItem = () => {
               }}
               src={profileIcon}
             >
-              MuhammadAli Eshonqulov
+              {speakerName}
             </IconTool>
             <IconTool
               iconStyle={{
@@ -51,7 +67,7 @@ export const PostItem = () => {
               }}
               src={calendarIcon}
             >
-              17 / 01 / 2022
+              {postDate}
             </IconTool>
             <IconTool
               style={{
@@ -62,7 +78,7 @@ export const PostItem = () => {
               }}
               src={onlineIcon}
             >
-              Online
+              {postType}
             </IconTool>
           </ul>
           <ul className="post-item__list post-item__list-2">
@@ -78,7 +94,7 @@ export const PostItem = () => {
               }}
               src={jobIcon}
             >
-              Tadbirkor
+              {speakerJob}
             </IconTool>
             <IconTool
               iconStyle={{
@@ -92,7 +108,7 @@ export const PostItem = () => {
               }}
               src={timeIcon}
             >
-              15:00
+              {postTime}
             </IconTool>
             <IconTool
               style={{

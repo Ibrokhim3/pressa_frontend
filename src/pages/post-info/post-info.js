@@ -28,7 +28,7 @@ export const PostInfo = () => {
   return (
     <div className="post-info">
       <Header style={{ marginBottom: "42px" }}></Header>
-      <Container>
+      <Container style={{ marginBottom: "272px" }}>
         <div className="post-info__page-name">
           {/* style lar togri berilmadi */}
           <PageName style={{ marginBottom: "76px" }}>

@@ -89,6 +89,7 @@
   background: rgba($color: $text-color, $alpha: 0.1);
   border-radius: 3px;
   max-width: 310px;
+  display: flex;
 }
 
 .add-post__radio-button-wrapper {
