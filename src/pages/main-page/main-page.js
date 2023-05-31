@@ -24,9 +24,8 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 export const MainPage = () => {
-  const { list, loading, error, searchValue } = useSelector(
-    (state) => state.posts
-  );
+  const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
+    useSelector((state) => state.posts);
 
   const dispatch = useDispatch();
 
@@ -36,6 +35,8 @@ export const MainPage = () => {
     fetch(
       `http://localhost:2001/pressa/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
+        // category: checkboxDirValue,
+        // date: dateValue,
       })}`
     )
       .then((res) => {
@@ -46,7 +47,6 @@ export const MainPage = () => {
       })
       .then((data) => {
         dispatch(postsAction.setList(data));
-        console.log(data);
       })
       .catch((err) => {
         return console.log(err);

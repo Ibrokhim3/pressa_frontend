@@ -6,7 +6,10 @@ export const { actions: postsAction, reducer: postsReducer } = createSlice({
     list: null,
     loading: false,
     error: null,
-    searchValue: ""
+    searchValue: "",
+    filterValue: null,
+    dateValue: "",
+    checkboxDirValue: "",
   },
   reducers: {
     setList: (state, { payload }) => {
@@ -20,8 +23,17 @@ export const { actions: postsAction, reducer: postsReducer } = createSlice({
       state.error = payload;
       state.loading = false;
     },
-    setSearchValue: (state, {payload})=>{
-      state.searchValue = payload
-    }
+    setSearchValue: (state, { payload }) => {
+      state.searchValue = payload;
+    },
+    setDateValue: (state, { payload }) => {
+      state.dateValue = payload;
+    },
+    setDirCheckboxValue: (state, { payload }) => {
+      state.checkboxDirValue = payload;
+    },
+    setFilterValue: (state, { payload }) => {
+      state.filterValue = payload;
+    },
   },
 });

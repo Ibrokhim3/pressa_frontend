@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import {
   Container,
   Footer,
   Header,
   InputRadio,
   InputText,
+  Option,
   PageName,
   PostInput,
   Select,
@@ -12,10 +14,28 @@ import {
 export const AddPost = () => {
   const elModal = document.querySelector(".add-post__modal");
 
+  const [options, setOptions] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:2001/pressa/get-main-categories")
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        setOptions(data);
+      })
+      .catch((err) => {
+        return console.log(err);
+      });
+  }, []);
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
-    fetch("http://localhost:2000/pressa/test-upload", {
+    fetch("http://localhost:2001/pressa/test-upload", {
       method: "POST",
       headers: "Content-type",
     });
@@ -59,12 +79,11 @@ export const AddPost = () => {
                 <label className="post-form-label" htmlFor="dirSelect">
                   Yo’nalishni belgilang
                   <Select id={"dirSelect"}>
-                    <option className="option" value="">
-                      Information Technologies
-                    </option>
-                    <option className="option" value="">
-                      Disegn
-                    </option>
+                    {options?.map((item, index) => (
+                      <option value={item.category} key={index}>
+                        {item.category}
+                      </option>
+                    ))}
                   </Select>
                 </label>
                 <label className="post-form-label" htmlFor="innerDir">

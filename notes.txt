@@ -27,3 +27,8 @@ koproq korish... margin ?
 
 Search tooldagi dizayn muammolari
 Scss main .scss ext needed ?
+
+checkbox dir value dagi muammolar array, 
+izlash button bosilsa izlash kk main-page
+
+option component kk emas bolishi mumkun

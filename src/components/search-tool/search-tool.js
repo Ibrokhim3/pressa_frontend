@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import categoryIcon from "../../assets/icons/category.svg";
 import isOnlineIcon from "../../assets/icons/online.svg";
 import profileIcon from "../../assets/icons/profile.svg";
+import { postsAction } from "../../store";
 
 import { ArrowDown } from "../arrow-down";
 import { Checkbox } from "../checkbox";
@@ -15,14 +17,31 @@ export const SearchTool = ({ style }) => {
     setNavbarOpen((prev) => !prev);
   };
 
+  const dispatch = useDispatch();
+
+  const handleSearchDateChange = (evt) => {
+    dispatch(postsAction.setDateValue(evt.target.value));
+  };
+
+  const handleBtnSearch = (evt) => {
+    evt.preventDefault();
+    // dispatch(postsAction.setFilterValue(evt.target.value));
+    console.log(evt.target.elements.inputDate.value);
+    const {
+      inputDate: { value: inputDate },
+    } = evt.target.elements;
+    console.log();
+  };
+
   return (
-    <div style={style} className="search-tool">
+    <form onSubmit={handleBtnSearch} style={style} className="search-tool">
       <ul className="search-tool__list">
         {/*li ni component qilsa boladi*/}
         <li className="search-tool__item">
           {/*shu divni component qilsa boladi*/}
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
+              onChange={handleSearchDateChange}
               id="inputDate"
               className="search-tool__input-date"
               type="date"
@@ -47,19 +66,19 @@ export const SearchTool = ({ style }) => {
               }`}
             >
               <li className="search-tool__dir-item">
-                <Checkbox>IT</Checkbox>
+                <Checkbox value={"IT"}>IT</Checkbox>
               </li>
               <li className="search-tool__dir-item">
-                <Checkbox>Dizayn</Checkbox>
+                <Checkbox value={"Dizayn"}>Dizayn</Checkbox>
               </li>
               <li className="search-tool__dir-item">
-                <Checkbox>Motion Dizayn</Checkbox>
+                <Checkbox value={"Motion Dizayn"}>Motion Dizayn</Checkbox>
               </li>
               <li className="search-tool__dir-item">
-                <Checkbox>Robototexnika</Checkbox>
+                <Checkbox value={"Robototexnika"}>Robototexnika</Checkbox>
               </li>
               <li className="search-tool__dir-item">
-                <Checkbox>SMM</Checkbox>
+                <Checkbox value={"SMM"}>SMM</Checkbox>
               </li>
             </ul>
           </div>
@@ -81,7 +100,9 @@ export const SearchTool = ({ style }) => {
           </div>
         </li>
       </ul>
-      <button className="search-tool__button">Izlash</button>
-    </div>
+      <button type="submit" className="search-tool__button">
+        Izlash
+      </button>
+    </form>
   );
 };
