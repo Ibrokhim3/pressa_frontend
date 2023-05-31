@@ -62,4 +62,9 @@
   line-height: 40px;
   color: $white;
   border: 0;
+  cursor: pointer;
+
+  &:active {
+    background: #021a3b;
+  }
 }

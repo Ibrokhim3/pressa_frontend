@@ -1,7 +1,7 @@
-export const Select = ({ children, id }) => {
+export const Select = ({ children, id, onChange, checked }) => {
   return (
     <div className="select-wrapper">
-      <select className="select" name="" id={id}>
+      <select onChange={onChange} className="select" name="" id={id}>
         {children}
       </select>
     </div>

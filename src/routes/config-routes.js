@@ -1,6 +1,8 @@
 import { useRoutes } from "react-router-dom";
 import { AddPost, AdminPanel, LoginPage, MainPage, PostInfo } from "../pages";
 
+const token = localStorage.getItem("token");
+
 const routes = [
   {
     path: "/",
@@ -25,7 +27,7 @@ const routes = [
   },
   {
     path: "admin-panel",
-    element: <AdminPanel></AdminPanel>,
+    element: token ? <AdminPanel></AdminPanel> : <LoginPage></LoginPage>,
   },
 ];
 

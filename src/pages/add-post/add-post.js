@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
   Footer,
@@ -10,11 +12,27 @@ import {
   PostInput,
   Select,
 } from "../../components";
+import { postsAction } from "../../store";
 
 export const AddPost = () => {
   const elModal = document.querySelector(".add-post__modal");
 
+  const { list, loading, error } = useSelector((state) => state.posts);
+
   const [options, setOptions] = useState(null);
+  const [direction, setDirection] = useState(null);
+  const [inputValue, setInputValue] = useState("online");
+  const [file, setFile] = useState(null);
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const styles = {
+    opacity: loading ? 0.7 : 1,
+  };
+
+  const selectedCategory = options?.find((item) => item.category === direction);
 
   useEffect(() => {
     fetch("http://localhost:2001/pressa/get-main-categories")
@@ -32,15 +50,88 @@ export const AddPost = () => {
       });
   }, []);
 
+  const onFileChange = async (e) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const onValueChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(postsAction.setLoading(true));
 
-    fetch("http://localhost:2001/pressa/test-upload", {
+    const {
+      inputDate: { value: postDate },
+      inputTime: { value: postTime },
+      dirSelect: { value: postDir },
+      innerDirSelect: { value: postInnerDir },
+      inputLink: { value: postLink },
+      inputName: { value: speakerName },
+      inputJob: { value: speakerJob },
+      inputPhone: { value: speakerTelNum },
+      inputAddPhone: { value: speakerTelNum2 },
+      inputTitle: { value: postTitle },
+      inputDesc: { value: postDesc },
+      inputTextarea: { value: postText },
+    } = evt.target;
+
+    // console.log(
+    //   postDate,
+    //   postTime,
+    //   postDir,
+    //   postInnerDir,
+    //   inputValue,
+    //   postLink,
+    //   speakerName,
+    //   speakerJob,
+    //   speakerTelNum,
+    //   speakerTelNum2,
+    //   postTitle,
+    //   postDesc,
+    //   postText
+    // );
+
+    const formData = new FormData();
+
+    formData.append("postDate", postDate);
+    formData.append("postTime", postTime);
+    formData.append("postDir", postDir);
+    formData.append("postInnerDir", postInnerDir);
+    formData.append("postType", inputValue);
+    formData.append("postLink", postLink);
+    formData.append("speakerName", speakerName);
+    formData.append("speakerJob", speakerJob);
+    formData.append("speakerTelNum", speakerTelNum);
+    formData.append("speakerTelNum2", speakerTelNum2);
+    formData.append("postTitle", postTitle);
+    formData.append("postImg", file);
+    formData.append("postDesc", postDesc);
+    formData.append("postText", postText);
+
+    fetch("http://localhost:2001/pressa/add-post", {
       method: "POST",
-      headers: "Content-type",
-    });
-
-    elModal.style.display = "block";
+      // headers: { "Content-type": "Application/json" },
+      body: formData,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        alert(data);
+        elModal.style.display = "block";
+        dispatch(postsAction.setLoading(false));
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   return (
@@ -57,20 +148,20 @@ export const AddPost = () => {
               <div className="add-post__form-date-wrapper">
                 <label
                   className="add-post__input-date-label"
-                  htmlFor="input-date"
+                  htmlFor="inputDate"
                 >
                   O’tkaziladigan sanani kiriting
                 </label>
                 {/* <div className="add-post__input-date-wrapper"> */}
                 <input
-                  id="input-date"
+                  id="inputDate"
                   className="add-post__input-date"
                   type="date"
                 />
                 {/* </div> */}
 
                 <input
-                  id="input-time"
+                  id="inputTime"
                   className="add-post__input-date add-post__input-date-1"
                   type="time"
                 />
@@ -78,7 +169,10 @@ export const AddPost = () => {
               <div className="add-post__form-dir-wrapper">
                 <label className="post-form-label" htmlFor="dirSelect">
                   Yo’nalishni belgilang
-                  <Select id={"dirSelect"}>
+                  <Select
+                    onChange={(e) => setDirection(e.target.value)}
+                    id={"dirSelect"}
+                  >
                     {options?.map((item, index) => (
                       <option value={item.category} key={index}>
                         {item.category}
@@ -86,15 +180,14 @@ export const AddPost = () => {
                     ))}
                   </Select>
                 </label>
-                <label className="post-form-label" htmlFor="innerDir">
+                <label className="post-form-label" htmlFor="innerDirSelect">
                   Ichki yo’nalish
-                  <Select id={"innerDir"}>
-                    <option className="option" value="">
-                      Java developer
-                    </option>
-                    <option className="option" value="">
-                      Node Js developer
-                    </option>
+                  <Select id={"innerDirSelect"}>
+                    {selectedCategory?.subCategory?.map((item, index) => (
+                      <option value={item} key={index}>
+                        {item}
+                      </option>
+                    ))}
                   </Select>
                 </label>
               </div>
@@ -105,6 +198,8 @@ export const AddPost = () => {
                     <div className="add-post__radio-button-wrapper">
                       <input
                         checked
+                        onChange={onValueChange}
+                        value="online"
                         className="add-post__form-radio"
                         id="onlineInput"
                         type="radio"
@@ -119,6 +214,8 @@ export const AddPost = () => {
                     </div>
                     <div className="add-post__radio-button-wrapper">
                       <input
+                        onChange={onValueChange}
+                        value="offline"
                         className="add-post__form-radio"
                         id="offlineInput"
                         type="radio"
@@ -135,7 +232,8 @@ export const AddPost = () => {
                 </label>
 
                 <InputText
-                  htmlFor={"input-link"}
+                  id={"inputLink"}
+                  htmlFor={"inputLink"}
                   inputStyle={{ color: "#0085FF" }}
                 >
                   Link kiriting
@@ -153,16 +251,34 @@ export const AddPost = () => {
               className="add-post__form-group-wrapper"
             >
               <div className="add-post__form-personal-wrapper">
-                <InputText style={{ marginBottom: "30px" }}>
+                <InputText
+                  id={"inputName"}
+                  htmlFor={"inputName"}
+                  style={{ marginBottom: "30px" }}
+                >
                   Ismi sharifi
                 </InputText>
-                <InputText style={{ marginBottom: "30px" }}>
+                <InputText
+                  id={"inputJob"}
+                  htmlFor={"inputJob"}
+                  style={{ marginBottom: "30px" }}
+                >
                   Professiya
                 </InputText>
-                <InputText max={"13"} inputType={"number"}>
+                <InputText
+                  id={"inputPhone"}
+                  htmlFor={"inputPhone"}
+                  // max={"13"}
+                  inputType={"number"}
+                >
                   Telefon raqami
                 </InputText>
-                <InputText max={"13"} inputType={"number"}>
+                <InputText
+                  id={"inputAddPhone"}
+                  htmlFor={"inputAddPhone"}
+                  // max={"13"}
+                  inputType={"number"}
+                >
                   Qo’shimcha tel raqam
                 </InputText>
               </div>
@@ -173,11 +289,14 @@ export const AddPost = () => {
             >
               <p className="add-post__form-text add-post__form-text-1">Post</p>
               <input
+                id="inputTitle"
                 placeholder="Mavzuni sarlavhasi"
                 className="add-post__form-post-input"
                 type="text"
               />
               <InputText
+                id={"inputDesc"}
+                htmlFor={"inputDesc"}
                 style={{ marginBottom: "41px", width: "100%" }}
                 inputStyle={{ width: "100%" }}
                 placeholder={"Description"}
@@ -187,10 +306,12 @@ export const AddPost = () => {
               <label
                 style={{ marginBottom: "20px" }}
                 className="post-form-label"
-                htmlFor=""
+                htmlFor="inputFile"
               >
                 Rasm yuklash
                 <input
+                  onChange={onFileChange}
+                  id="inputFile"
                   className="add-post__upload-input"
                   type="file"
                   accept="image/*"
@@ -202,17 +323,25 @@ export const AddPost = () => {
               <label
                 style={{ marginBottom: "50px" }}
                 className="post-form-label"
+                htmlFor="inputTextarea"
               >
                 Mavzu matni
                 <textarea
+                  id="inputTextarea"
                   className="add-post__form-textarea"
                   placeholder="Mavzu matni"
                 ></textarea>
               </label>
-              <button className="add-post__form-cancel-button">
+              <Link to={"/"} className="add-post__form-cancel-button">
                 Bekor qilish
-              </button>
-              <button type="submit" className="add-post__form-submit-button">
+              </Link>
+              <button
+                id="submitBtn"
+                disabled={loading}
+                type="submit"
+                style={styles}
+                className="add-post__form-submit-button"
+              >
                 E’lonni yuborish
               </button>
             </div>

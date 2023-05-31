@@ -32,3 +32,8 @@ checkbox dir value dagi muammolar array,
 izlash button bosilsa izlash kk main-page
 
 option component kk emas bolishi mumkun
+
+add-post select direction da muammo
+
+admin-panel btn click qilindi, submit bolish kk emasmi ? tasqiqlash va bekor qilish button lari
+token get-moderating-posts routinda ishlamadi

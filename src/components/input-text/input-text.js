@@ -1,5 +1,5 @@
 export const InputText = (
-  { inputType, style, inputStyle, children, max, className, placeholder },
+  {id, inputType, style, inputStyle, children, max, className, placeholder },
   htmlFor
 ) => {
   return (
@@ -9,7 +9,7 @@ export const InputText = (
         placeholder={placeholder}
         max={max}
         style={inputStyle}
-        id={htmlFor}
+        id={id}
         className="input-text"
         type={inputType ? inputType : "text"}
       />

@@ -1,27 +1,26 @@
 import {
+  Button,
   Container,
+  Footer,
   Header,
+  PostItem,
   SearchTool,
   TitleText,
-  PostItem,
-  Button,
-  Footer,
 } from "../../components";
 
-import personInSuitWebp from "../../assets/images/img-bottom.webp";
-import personInSuitWebp2x from "../../assets/images/img-bottom@2x.webp";
 import personInSuitPng from "../../assets/images/img-bottom.png";
+import personInSuitWebp from "../../assets/images/img-bottom.webp";
 import personInSuitPng2x from "../../assets/images/img-bottom@2x.png";
+import personInSuitWebp2x from "../../assets/images/img-bottom@2x.webp";
 
-import personInSuit2Webp from "../../assets/images/img-bottom2.webp";
-import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
-import personInSuit2Png from "../../assets/images/img-bottom2.png";
-import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { postsAction } from "../../store/posts";
+import { useDispatch, useSelector } from "react-redux";
+import personInSuit2Png from "../../assets/images/img-bottom2.png";
+import personInSuit2Webp from "../../assets/images/img-bottom2.webp";
+import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
+import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
 import { useDebounce } from "../../hooks/useDebounce";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import { postsAction } from "../../store/posts";
 
 export const MainPage = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =

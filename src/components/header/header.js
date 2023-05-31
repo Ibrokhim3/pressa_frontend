@@ -20,7 +20,9 @@ export const Header = ({ style }) => {
     <header style={style} className="header">
       <Container>
         <div className="header__div">
-          <span className="header__logo">Pressa</span>
+          <Link to={"/"} className="header__logo">
+            Pressa
+          </Link>
           {/* <img className="header__search-icon" src={searchIcon} alt="search" /> */}
           <label
             className="header__search-input-label"

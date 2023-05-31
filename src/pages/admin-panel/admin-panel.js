@@ -8,17 +8,107 @@ import exitIcon from "../../assets/icons/exit-arrow.svg";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/container/container";
 import { InputRadio } from "../../components";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { postsAction } from "../../store";
 
 export const AdminPanel = () => {
+  const token = localStorage.getItem("token");
+
+  const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
+    useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
+
+  const handleSearchChange = (evt) => {
+    dispatch(postsAction.setSearchValue(evt.target.value));
+  };
+
+  const debouncedValue = useDebounce(searchValue, 500);
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:2001/pressa/get-moderating-posts?${new URLSearchParams({
+        search: debouncedValue,
+      })}`,
+      {
+        method: "GET",
+        headers: { "Content-type": "Application/json", token },
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        dispatch(postsAction.setList(data));
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, [debouncedValue, list]);
+
+  const onBtnClick = (evt) => {
+    evt.preventDefault();
+
+    const id = evt.target.dataset.id;
+    const type = evt.target.dataset.type;
+
+    fetch("http://localhost:2001/pressa/moderate-post", {
+      method: "POST",
+      headers: { "Content-type": "Application/json", token },
+      body: JSON.stringify({ type, id }),
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.json();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        alert(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+  // const onBtnCancel = (evt) => {
+  //   evt.preventDefault();
+
+  //   fetch("http://localhost:2001/pressa/moderate-post", {
+  //     method: "POST",
+  //     headers: { "Content-type": "Application/json" },
+  //     // body: JSON.stringify({ }),
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 201) {
+  //         return res.json();
+  //       }
+  //       return Promise.reject(res);
+  //     })
+  //     .then((data) => {
+  //       localStorage.setItem("token", data.token);
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // };
+
   return (
     <div className="admin-panel">
       <div className="admin-panel__aside">
         <p className="admin-panel__logo" href="#">
-          <Link className="admin-panel__logo-link">Pressa</Link>
+          <Link to={"/"} className="admin-panel__logo-link">
+            Pressa
+          </Link>
         </p>
         <ul className="admin-panel__setting-list">
           <li className="admin-panel__setting-item">
-            <Link className="admin-panel__setting-link">
+            <Link to={"/"} className="admin-panel__setting-link">
               <img src={homeIcon} alt="go to main page" />
               Bosh sahifa
             </Link>
@@ -43,7 +133,11 @@ export const AdminPanel = () => {
             </Link>
           </li>
           <li className="admin-panel__setting-item">
-            <Link className="admin-panel__setting-link">
+            <Link
+              onClick={localStorage.setItem("token", "")}
+              to={"/login"}
+              className="admin-panel__setting-link"
+            >
               {" "}
               <img src={exitIcon} alt="go to main page" />
               Chiqish
@@ -69,9 +163,11 @@ export const AdminPanel = () => {
               />
             </svg>
             <input
+              onChange={handleSearchChange}
+              id="inputSearch"
               placeholder="search"
               className="admin-panel__search-input"
-              type="text"
+              type="search"
             />
           </div>
           <div className="admin-panel__top-profile">
@@ -134,32 +230,49 @@ export const AdminPanel = () => {
       <Container style={{ maxWidth: "1140px" }}>
         <Container style={{ maxWidth: "900px", marginLeft: "0", padding: "0" }}>
           <p className="admin-panel__top-text">Eng so’ngi xabarnomalar</p>
+
           <ul className="admin-panel__posts">
-            <li className="admin-panel__post-item">
-              <div className="admin-panel__post-top-wrapper">
-                <p className="admin-panel__post-item-text">
-                  Ux Ui dan masterklass o’tkazib yubormang Yoshlar telekanalida
-                </p>
-                <div className="admin-panel__buttons">
-                  <button className="admin-panel_cancel-button">
-                    Bekor qilish
-                  </button>
-                  <button className="admin-panel__submit-button">
-                    Tasdiqlash
-                  </button>
+            {list?.map((item, index) => (
+              <li key={index} className="admin-panel__post-item">
+                <div className="admin-panel__post-top-wrapper">
+                  <p className="admin-panel__post-item-text">
+                    {item.postTitle}
+                  </p>
+                  <div className="admin-panel__buttons">
+                    <button
+                      data-type="false"
+                      data-id={item._id}
+                      onClick={onBtnClick}
+                      className="admin-panel_cancel-button"
+                    >
+                      Bekor qilish
+                    </button>
+
+                    <button
+                      data-type="true"
+                      data-id={item._id}
+                      onClick={onBtnClick}
+                      className="admin-panel__submit-button"
+                    >
+                      Tasdiqlash
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <ul className="admin-panel__info-list">
-                <li className="admin-panel__info-item admin-panel__info-item-1">
-                  Abbos Janizakov
-                </li>
-                <li className="admin-panel__info-item">+998 90 123-45-67</li>
-                <li className="admin-panel__info-item">30/01/2022</li>
-                <li className="admin-panel__info-item">15:00</li>
-                <li className="admin-panel__info-item">UI/UX dizayner</li>
-              </ul>
-              <span className="admin-panel__info-line"></span>
-            </li>
+                <ul className="admin-panel__info-list">
+                  <li className="admin-panel__info-item admin-panel__info-item-1">
+                    {item.speakerName}
+                  </li>
+                  <li className="admin-panel__info-item">
+                    {" "}
+                    {item.speakerTelNum}
+                  </li>
+                  <li className="admin-panel__info-item"> {item.postDate}</li>
+                  <li className="admin-panel__info-item"> {item.postTime}</li>
+                  <li className="admin-panel__info-item">{item.speakerJob}</li>
+                </ul>
+                <span className="admin-panel__info-line"></span>
+              </li>
+            ))}
           </ul>
         </Container>
       </Container>
