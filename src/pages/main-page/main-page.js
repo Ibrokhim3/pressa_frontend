@@ -34,8 +34,8 @@ export const MainPage = () => {
     fetch(
       `http://localhost:2001/pressa/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
+        date: dateValue,
         // category: checkboxDirValue,
-        // date: dateValue,
       })}`
     )
       .then((res) => {
@@ -50,7 +50,7 @@ export const MainPage = () => {
       .catch((err) => {
         return console.log(err);
       });
-  }, [debouncedValue]);
+  }, [debouncedValue, dateValue]);
 
   return (
     <div className="main-page__top">
