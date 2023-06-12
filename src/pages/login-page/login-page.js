@@ -1,11 +1,25 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Container } from "../../components";
+import { postsAction } from "../../store";
+import { API_URL } from "../../variables";
 
 export const LoginPage = () => {
+  const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
+    useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+  const styles = {
+    opacity: loading ? 0.7 : 1,
+  };
 
   const onLoginSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(postsAction.setLoading(true));
 
     const {
       inputPass: { value: password },
@@ -17,7 +31,7 @@ export const LoginPage = () => {
       password,
     };
 
-    fetch("http://localhost:2001/pressa/login", {
+    fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify(user),
@@ -30,11 +44,12 @@ export const LoginPage = () => {
       })
       .then((data) => {
         localStorage.setItem("token", data.token);
+        dispatch(postsAction.setLoading(false));
+        navigate("/admin-panel");
       })
       .catch((err) => {
         alert(err);
       });
-    navigate("/admin-panel");
   };
 
   return (
@@ -61,7 +76,11 @@ export const LoginPage = () => {
             </span>
           </div>
           <div className="login-page__button-wrapper">
-            <button type="submit" className="login-page__form-button">
+            <button
+              style={styles}
+              type="submit"
+              className="login-page__form-button"
+            >
               Kirish
             </button>
           </div>

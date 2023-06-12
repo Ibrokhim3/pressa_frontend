@@ -21,6 +21,7 @@ import personInSuit2Png2x from "../../assets/images/img-bottom2@2x.png";
 import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
 import { useDebounce } from "../../hooks/useDebounce";
 import { postsAction } from "../../store/posts";
+import { API_URL } from "../../variables";
 
 export const MainPage = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
@@ -32,7 +33,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:2001/pressa/get-active-posts?${new URLSearchParams({
+      `${API_URL}/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
         date: dateValue,
         // category: checkboxDirValue,

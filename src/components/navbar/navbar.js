@@ -5,8 +5,9 @@ export const Navbar = ({ style, navStyle, ulStyle }) => {
     <nav style={navStyle}>
       <ul style={ulStyle} className="navbar__list">
         <li className="navbar__list-item">
-          <Link style={style} className="navbar__item-link">
-            Biz haqimizda
+          <Link to={"/admin-panel"} style={style} className="navbar__item-link">
+            Admin panel
+            {/* Biz haqimizda */}
           </Link>
         </li>
         <li className="navbar__list-item">

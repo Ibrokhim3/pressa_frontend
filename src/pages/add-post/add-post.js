@@ -13,6 +13,7 @@ import {
   Select,
 } from "../../components";
 import { postsAction } from "../../store";
+import { API_URL } from "../../variables";
 
 export const AddPost = () => {
   const elModal = document.querySelector(".add-post__modal");
@@ -35,7 +36,7 @@ export const AddPost = () => {
   const selectedCategory = options?.find((item) => item.category === direction);
 
   useEffect(() => {
-    fetch("http://localhost:2001/pressa/get-main-categories")
+    fetch(`${API_URL}/get-main-categories`)
       .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -62,7 +63,7 @@ export const AddPost = () => {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(postsAction.setLoading(true));
+    // dispatch(postsAction.setLoading(true));
 
     const {
       inputDate: { value: postDate },
@@ -112,7 +113,7 @@ export const AddPost = () => {
     formData.append("postDesc", postDesc);
     formData.append("postText", postText);
 
-    fetch("http://localhost:2001/pressa/add-post", {
+    fetch(`${API_URL}/add-post`, {
       method: "POST",
       // headers: { "Content-type": "Application/json" },
       body: formData,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import categoryIcon from "../../assets/icons/category.svg";
@@ -33,6 +33,11 @@ export const SearchTool = ({ style }) => {
     console.log();
   };
 
+  const interviewDateRef = useRef();
+  const handleInterviewDateClick = () => {
+    interviewDateRef.current.focus();
+  };
+
   return (
     <form onSubmit={handleBtnSearch} style={style} className="search-tool">
       <ul className="search-tool__list">
@@ -41,15 +46,25 @@ export const SearchTool = ({ style }) => {
           {/*shu divni component qilsa boladi*/}
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
+              // ref={interviewDateRef}
               onChange={handleSearchDateChange}
               id="inputDate"
-              className="search-tool__input-date"
+              className="search-tool__input-date search-tool__input-date-style"
               type="date"
             />
+
             {/* <IconTool style={{ marginLeft: "13px" }} src={calendarIcon}>
               22/02/2022
             </IconTool> */}
-            <ArrowDown style={{ marginLeft: "15px" }}></ArrowDown>
+            {/* <button onClick={handleInterviewDateClick}> */}
+            <ArrowDown
+              style={{
+                position: "absolute",
+                pointerEvents: "none",
+                right: 15,
+              }}
+            ></ArrowDown>
+            {/* </button> */}
           </label>
         </li>
         <li className="search-tool__item search-tool__item-2">

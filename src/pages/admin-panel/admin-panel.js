@@ -12,6 +12,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { postsAction } from "../../store";
+import { API_URL } from "../../variables";
 
 export const AdminPanel = () => {
   const token = localStorage.getItem("token");
@@ -29,7 +30,7 @@ export const AdminPanel = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:2001/pressa/get-moderating-posts?${new URLSearchParams({
+      `${API_URL}/get-moderating-posts?${new URLSearchParams({
         search: debouncedValue,
       })}`,
       {
@@ -57,7 +58,7 @@ export const AdminPanel = () => {
     const id = evt.target.dataset.id;
     const type = evt.target.dataset.type;
 
-    fetch("http://localhost:2001/pressa/moderate-post", {
+    fetch(`${API_URL}/moderate-post`, {
       method: "POST",
       headers: { "Content-type": "Application/json", token },
       body: JSON.stringify({ type, id }),

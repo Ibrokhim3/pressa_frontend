@@ -64,6 +64,37 @@
 .search-tool__input-date {
   border: none;
   outline: none;
+  position: relative;
+  width: 152px;
+
+  &::-webkit-datetime-edit-fields-wrapper {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+.search-tool__input-date::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("../../assets/icons/calendar.svg") no-repeat;
+  width: 25px;
+  height: 25px;
+  border-width: thin;
+  position: absolute;
+  top: 6px;
+  left: -30px;
+  cursor: pointer;
+  // background: transparent;
+  bottom: 0;
+  // color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: -30px;
+  position: absolute;
+  right: 0;
+  top: 5.5px;
+  width: auto;
 }
 
 .search-tool__button {
