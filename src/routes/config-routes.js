@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: "admin-panel",
-    element: token ? <AdminPanel></AdminPanel> : <LoginPage></LoginPage>,
+    element: <AdminPanel></AdminPanel>,
   },
 ];
 

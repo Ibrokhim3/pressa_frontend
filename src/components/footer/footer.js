@@ -4,13 +4,16 @@ import phoneIcon from "../../assets/icons/phone.svg";
 import facebookIcon from "../../assets/icons/facebook.svg";
 import instaIcon from "../../assets/icons/instagram.svg";
 import telegIcon from "../../assets/icons/telegram.svg";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
     <footer className="footer">
       <Container>
         <div className="footer__wrapper">
-          <span className="footer__logo">Pressa</span>
+          <Link to={"/"} className="footer__logo">
+            Pressa
+          </Link>
           <Navbar
             ulStyle={{ gap: "77px" }}
             style={{ fontWeight: "500" }}

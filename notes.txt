@@ -37,3 +37,11 @@ add-post select direction da muammo
 
 admin-panel btn click qilindi, submit bolish kk emasmi ? tasqiqlash va bekor qilish button lari
 token get-moderating-posts routinda ishlamadi
+
+search tool checkbox margin between list 65px 
+search tool icon tool semanti li ?
+input radio checked bosa ishlamayapti
+
+
+
+

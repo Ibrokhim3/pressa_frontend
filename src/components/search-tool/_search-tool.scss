@@ -13,6 +13,7 @@
 
 .search-tool__item {
   @include flex-centring;
+  position: relative;
 }
 
 .search-tool__item-2 {
@@ -22,12 +23,30 @@
   position: relative;
 }
 
+.search-tool__item-menu {
+}
+
 .search-tool__dir-list {
   display: none;
+  min-width: 441px;
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 524px;
   padding: 20px 48px 61px 30px;
+  background: $white;
+  box-shadow: 2px 4px 11px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  position: absolute;
+  top: 90px;
+  left: -25px;
+  z-index: 50;
+}
+
+.search-tool__dir-list-2 {
+  display: none;
+  flex-direction: column;
+  min-width: 264px;
+  padding: 30px 0px 30px 30px;
   background: $white;
   box-shadow: 2px 4px 11px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
@@ -81,14 +100,10 @@
   width: 25px;
   height: 25px;
   border-width: thin;
-  position: absolute;
   top: 6px;
   left: -30px;
   cursor: pointer;
-  // background: transparent;
   bottom: 0;
-  // color: transparent;
-  cursor: pointer;
   height: auto;
   left: -30px;
   position: absolute;
@@ -109,4 +124,42 @@
   color: $white;
 
   cursor: pointer;
+}
+
+//checkbox-list
+
+.search-tool__dir-item {
+  margin-right: 65px;
+}
+
+.search-tool__dir-item-text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+
+.search-tool__dir-item-inner:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.search-tool__dir-item-inner:last-child {
+  margin-bottom: 20px;
+}
+
+//radio
+
+.search-tool__item-wrapper-type-wrapper {
+  position: absolute;
+  display: none;
+  padding: 26px 93px 26px 32px;
+  background: $white;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  top: 90px;
+}
+
+.search-tool__item-wrapper-type-wrapper-show {
+  display: block;
 }
