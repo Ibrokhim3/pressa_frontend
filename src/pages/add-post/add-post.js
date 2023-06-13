@@ -25,6 +25,8 @@ export const AddPost = () => {
   const [inputValue, setInputValue] = useState("online");
   const [file, setFile] = useState(null);
 
+  console.log(inputValue);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -38,10 +40,12 @@ export const AddPost = () => {
   useEffect(() => {
     fetch(`${API_URL}/get-main-categories`)
       .then((res) => {
-        if (res.status === 200) {
-          return res.json();
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         }
-        return Promise.reject(res);
+        return res.json();
       })
       .then((data) => {
         setOptions(data);
@@ -58,7 +62,7 @@ export const AddPost = () => {
   };
 
   const onValueChange = (e) => {
-    setInputValue(e.target.value);
+    setInputValue(e.currentTarget.value);
   };
 
   const handleFormSubmit = (evt) => {
@@ -115,14 +119,15 @@ export const AddPost = () => {
 
     fetch(`${API_URL}/add-post`, {
       method: "POST",
-      // headers: { "Content-type": "Application/json" },
       body: formData,
     })
       .then((res) => {
-        if (res.status === 201) {
-          return res.json();
+        if (res.status !== 201) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         }
-        return Promise.reject(res);
+        return res.json();
       })
       .then((data) => {
         alert(data);
@@ -174,6 +179,7 @@ export const AddPost = () => {
                     onChange={(e) => setDirection(e.target.value)}
                     id={"dirSelect"}
                   >
+                    <option value=""></option>
                     {options?.map((item, index) => (
                       <option value={item.category} key={index}>
                         {item.category}
@@ -198,7 +204,7 @@ export const AddPost = () => {
                   <div className="add-post__radio-wrapper">
                     <div className="add-post__radio-button-wrapper">
                       <input
-                        checked
+                        checked={inputValue === "online"}
                         onChange={onValueChange}
                         value="online"
                         className="add-post__form-radio"
@@ -215,6 +221,7 @@ export const AddPost = () => {
                     </div>
                     <div className="add-post__radio-button-wrapper">
                       <input
+                        checked={inputValue === "offline"}
                         onChange={onValueChange}
                         value="offline"
                         className="add-post__form-radio"
