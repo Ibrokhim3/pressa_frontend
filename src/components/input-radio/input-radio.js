@@ -1,7 +1,7 @@
 import onlineIcon from "../../assets/icons/online.svg";
 import offLineIcon from "../../assets/icons/post-offline.svg";
 
-export const InputRadio = ({ style, value1, value2, postType }) => {
+export const InputRadio = ({ style, value1, value2, postType, checked }) => {
   return (
     <ul style={style} className="radio-list">
       <li className="radio-item">
@@ -11,9 +11,10 @@ export const InputRadio = ({ style, value1, value2, postType }) => {
 
         {postType && <img src={onlineIcon} alt="online" />}
         <input
+          type="radio"
           id="radio1"
           name="radio-trend"
-          type="radio"
+          value={value1}
           className="filter-radio"
         />
       </li>
@@ -23,9 +24,10 @@ export const InputRadio = ({ style, value1, value2, postType }) => {
         </label>
         {postType && <img src={offLineIcon} alt="offline" />}
         <input
+          type="radio"
           id="radio2"
           name="radio-trend"
-          type="radio"
+          value={value2}
           className="filter-radio"
         />
       </li>

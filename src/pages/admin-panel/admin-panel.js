@@ -39,10 +39,12 @@ export const AdminPanel = () => {
       }
     )
       .then((res) => {
-        if (res.status === 200) {
-          return res.json();
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         }
-        return Promise.reject(res);
+        return res.json();
       })
       .then((data) => {
         dispatch(postsAction.setList(data));

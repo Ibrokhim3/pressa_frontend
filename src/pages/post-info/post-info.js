@@ -149,7 +149,7 @@ export const PostInfo = () => {
                     className="post-info__comment-text"
                     placeholder="Izoh yozing..."
                     name=""
-                    id=""
+                    // id=""
                     cols="30"
                     rows="10"
                   ></textarea>

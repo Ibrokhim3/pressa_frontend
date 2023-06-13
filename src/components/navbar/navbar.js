@@ -11,8 +11,9 @@ export const Navbar = ({ style, navStyle, ulStyle }) => {
           </Link>
         </li>
         <li className="navbar__list-item">
-          <Link style={style} className="navbar__item-link">
-            Savol va javoblar
+          <Link to={"/about"} style={style} className="navbar__item-link">
+            Biz haqimizda
+            {/* Savol va javoblar */}
           </Link>
         </li>
       </ul>

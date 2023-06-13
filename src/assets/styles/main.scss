@@ -1,6 +1,6 @@
+@import "./variables";
 @import "./generals";
 @import "./normalize";
-@import "./variables";
 @import "./mixins";
 @import "../../components/container/container";
 @import "../../components/header/header";
@@ -24,4 +24,4 @@
 @import "../../pages/post-info/post-info";
 @import "../../components/checkbox/checkbox";
 @import "../../components/option/option.scss";
-
+@import "../../pages/about/about";

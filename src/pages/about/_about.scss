@@ -1,0 +1,18 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.about__title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: $text-color;
+}
+
+.about__text {
+  line-height: 40px;
+  max-width: 799px;
+  color: $text-color;
+}
