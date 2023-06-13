@@ -22,6 +22,7 @@ import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
 import { useDebounce } from "../../hooks/useDebounce";
 import { postsAction } from "../../store/posts";
 import { API_URL } from "../../variables";
+import { Link } from "react-router-dom";
 
 export const MainPage = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
@@ -67,7 +68,9 @@ export const MainPage = () => {
             <p className="main-page__status-text">Oxirgi e’lonlar</p>
             <ul className="main-page__post-list">
               {list?.map((item, index) => (
-                <PostItem key={index} item={item}></PostItem>
+                <Link to={`posts/${item._id}`}>
+                  <PostItem key={index} item={item}></PostItem>
+                </Link>
               ))}
               {/* <PostItem /> */}
             </ul>

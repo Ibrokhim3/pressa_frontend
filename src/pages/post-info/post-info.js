@@ -24,7 +24,38 @@ import profileImg from "../../assets/icons/profile-unsplash.svg";
 import profileImg2 from "../../assets/icons/profile-2.svg";
 import replyIcon from "../../assets/icons/reply.svg";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y, EffectCube } from "swiper";
+import "swiper/swiper-bundle.min.css";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+
 export const PostInfo = () => {
+  const { id } = useParams();
+
+  const { list, loading, error } = useSelector((state) => state.posts);
+
+  const selectedModel = list?.find((item, index) => item._id === id);
+
+  const {
+    _id: postId,
+    isRejected,
+    postDate,
+    postTime,
+    postDir,
+    postInnerDir,
+    isModerated,
+    postDesc,
+    postText,
+    postImgUrl,
+    postTitle,
+    postType,
+    speakerJob,
+    speakerName,
+    speakerTelNum,
+    speakerTelNum2,
+  } = selectedModel;
+
   return (
     <div className="post-info">
       <Header style={{ marginBottom: "42px" }}></Header>
@@ -32,27 +63,25 @@ export const PostInfo = () => {
         <div className="post-info__page-name">
           {/* style lar togri berilmadi */}
           <PageName style={{ marginBottom: "76px" }}>
-            Bizes <img src={rightIcon} alt="right-arrow" />
-            Alisher Isaevdan...
+            {postDir} <img src={rightIcon} alt="right-arrow" />
+            {speakerName}...
           </PageName>
           <div className="post-info__fixed-info">
-            <h3 className="post-info__fixed-title">
-              Alisher Isaevdan biznes va IT bo’yicha master klass
-            </h3>
+            <h3 className="post-info__fixed-title">{postTitle}</h3>
             <ul className="post-info__fixed-list">
               <li className="post-info__fixed-item post-info__fixed-item-1">
                 <IconTool style={{ marginLeft: "13px" }} src={calendarIcon}>
-                  17 / 01 / 2022
+                  {postDate}
                 </IconTool>
               </li>
               <li className="post-info__fixed-item post-info__fixed-item-2">
                 <IconTool style={{ marginLeft: "13px" }} src={timeIcon}>
-                  15:00
+                  {postTime}
                 </IconTool>
               </li>
               <li className="post-info__fixed-item post-info__fixed-item-3">
                 <IconTool style={{ marginLeft: "13px" }} src={onlineIcon}>
-                  Online
+                  {postType}
                 </IconTool>
               </li>
             </ul>
@@ -95,31 +124,17 @@ export const PostInfo = () => {
               margin: "0 0 161px auto",
             }}
           >
-            <h2 className="post-info__title">
-              Alisher Isaevdan biznes va IT bo’yicha master klass
-            </h2>
-            <p className="post-info__text">
-              Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan
-              musobaqalarni tashkil etishda davom etadi. Biz bu gal
-              markazimizdagi uch soha vakillari, ya'ni UX/UI dizayner, frontend
-              va backend dasturchilarni "bir dasturxon atrofida" to'plashga
-              qaror qildik.
-            </p>
-            <img className="post-info__img" src={postImg} alt="post-image" />
+            <h2 className="post-info__title">{postTitle}</h2>
+            <p className="post-info__text">{postDesc}</p>
+            <img
+              maxWidth={764}
+              maxHeight={498}
+              className="post-info__img"
+              src={postImgUrl}
+              alt="post-image"
+            />
             <p style={{ marginBottom: "54px" }} className="post-info__text">
-              Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan
-              musobaqalarni tashkil etishda davom etadi. Biz bu gal
-              markazimizdagi uch soha vakillari, ya'ni UX/UI dizayner, frontend
-              va backend dasturchilarni "bir dasturxon atrofida" to'plashga
-              qaror qildik. Kuni kecha bo'lib o'tgan uchrashuvda to'rt kishidan
-              iborat 8 ta guruh tashkil qilinib, ularga ikki hafta muddat ichida
-              Toshkent shahridagi har qanday onlayn va oflayn tadbirlar
-              to'g'risida e'lonli ma'lumot beruvchi uch bosqichli veb sahifa
-              tayyorlash vazifasi topshirildi. Demak, roppa-rosa 2 haftadan
-              keyin ishtirokchilarning qilgan ishlari chetdan kelgan mehmonlar
-              tomonidan xolis baholanib, dastlabki uchta o'rin egalari
-              qimmatbaho sovg'alar bilan taqdirlanadi. Biz barchaga omad tilab
-              qolamiz.
+              {postText}
             </p>
             <ul className="post-info__media-list">
               <li className="post-info__media-item">
@@ -131,10 +146,10 @@ export const PostInfo = () => {
                 Youtubedan tomosha qilish
               </li>
               <li className="post-info__media-item">
-                <img src={calendarIcon} alt="date" /> 22 / 01 / 2022
+                <img src={calendarIcon} alt="date" /> {postDate}
               </li>
               <li className="post-info__media-item">
-                <img src={timeIcon} alt="time" /> 14:00
+                <img src={timeIcon} alt="time" /> {postTime}
               </li>
             </ul>
 
@@ -223,11 +238,37 @@ export const PostInfo = () => {
         <div className="post-info__reccomended-posts">
           <p className="post-info__reccomended-text">Tavsiya etamiz</p>
           <ul className="post-info__reccomended-list">
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube]}
+              spaceBetween={50}
+              slidesPerView={3}
+              navigation
+              pagination={{ clickable: true }}
+              // scrollbar={{ draggable: true }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+              // effect={"cube"}
+              // cubeEffect={{
+              //   shadow: true,
+              //   slideShadows: true,
+              //   shadowOffset: 20,
+              //   shadowScale: 0.94,
+              // }}
+            >
+              {list?.map((item, index) => (
+                <SwiperSlide>
+                  <Link to={`/posts/${item._id}`}>
+                    <PostItem item={item} key={index}></PostItem>
+                  </Link>
+                </SwiperSlide>
+              ))}
+
+              {/* <PostItem></PostItem>
             <PostItem></PostItem>
             <PostItem></PostItem>
             <PostItem></PostItem>
-            <PostItem></PostItem>
-            <PostItem></PostItem>
+            <PostItem></PostItem> */}
+            </Swiper>
           </ul>
         </div>
       </Container>

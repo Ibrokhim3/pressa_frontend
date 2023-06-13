@@ -15,6 +15,10 @@ const routes = [
     path: "/",
     element: <MainPage></MainPage>,
   },
+  // {
+  //   path: "post-info",
+  //   element: <PostInfo></PostInfo>,
+  // },
   {
     path: "posts/:id",
     children: [
