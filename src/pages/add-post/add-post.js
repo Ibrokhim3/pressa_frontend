@@ -23,9 +23,9 @@ export const AddPost = () => {
   const [options, setOptions] = useState(null);
   const [direction, setDirection] = useState(null);
   const [inputValue, setInputValue] = useState("online");
+  const [radioValue, setRadioValue] = useState("Jismoniy shaxs");
   const [file, setFile] = useState(null);
-
-  console.log(inputValue);
+  // const [telInputValue, setTelInputValue] = useState("");
 
   const navigate = useNavigate();
 
@@ -64,6 +64,29 @@ export const AddPost = () => {
   const onValueChange = (e) => {
     setInputValue(e.currentTarget.value);
   };
+
+  const onValueChangeType = (e) => {
+    setRadioValue(e.currentTarget.value);
+  };
+
+  // const formatPhoneNumber = (value) => {
+  //   if (!value) return value;
+  //   const phoneNumber = value.replace(/[^\d]/g, "");
+  //   const phoneNumberLength = phoneNumber.length;
+  //   if (phoneNumberLength < 4) return phoneNumber;
+  //   if (phoneNumberLength > 7) {
+  //     return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  //   }
+  //   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+  //     3,
+  //     6
+  //   )}-${phoneNumber.slice(6, 10)}`;
+  // };
+
+  // const handleTelInput = (e) => {
+  //   const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+  //   setTelInputValue(formattedPhoneNumber);
+  // };
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -107,6 +130,7 @@ export const AddPost = () => {
     formData.append("postDir", postDir);
     formData.append("postInnerDir", postInnerDir);
     formData.append("postType", inputValue);
+    formData.append("postAuthor", radioValue);
     formData.append("postLink", postLink);
     formData.append("speakerName", speakerName);
     formData.append("speakerJob", speakerJob);
@@ -250,6 +274,9 @@ export const AddPost = () => {
             </div>
             <p className="add-post__form-text">Tashkilotchi</p>
             <InputRadio
+              checked1={radioValue === "Jismoniy shaxs"}
+              checked2={radioValue === "Yuridik shaxs"}
+              onChange={onValueChangeType}
               style={{ marginBottom: "8px" }}
               value1={"Jismoniy shaxs"}
               value2={"Yuridik shaxs"}
@@ -259,6 +286,15 @@ export const AddPost = () => {
               className="add-post__form-group-wrapper"
             >
               <div className="add-post__form-personal-wrapper">
+                {radioValue === "Yuridik shaxs" && (
+                  <InputText
+                    id={"inputName"}
+                    htmlFor={"inputName"}
+                    style={{ marginBottom: "30px" }}
+                  >
+                    Yuridik nomi
+                  </InputText>
+                )}
                 <InputText
                   id={"inputName"}
                   htmlFor={"inputName"}
@@ -273,22 +309,39 @@ export const AddPost = () => {
                 >
                   Professiya
                 </InputText>
-                <InputText
-                  id={"inputPhone"}
-                  htmlFor={"inputPhone"}
-                  // max={"13"}
-                  inputType={"number"}
-                >
-                  Telefon raqami
-                </InputText>
-                <InputText
-                  id={"inputAddPhone"}
-                  htmlFor={"inputAddPhone"}
-                  // max={"13"}
-                  inputType={"number"}
-                >
-                  Qo’shimcha tel raqam
-                </InputText>
+                <div className="add-post__input-sample-wrapper">
+                  <InputText
+                    // onChange={(e) => handleTelInput(e)}
+                    // value={telInputValue}
+                    id={"inputPhone"}
+                    htmlFor={"inputPhone"}
+                    inputType={"tel"}
+                    pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+                    placeholder={"+998 94 600-00-20"}
+                    // max={"13"}
+                  >
+                    Telefon raqami
+                  </InputText>
+
+                  <span className="add-post__input-sample">
+                    Namuna: +998 94 600-00-00
+                  </span>
+                </div>
+                <div className="add-post__input-sample-wrapper">
+                  <InputText
+                    id={"inputAddPhone"}
+                    htmlFor={"inputAddPhone"}
+                    pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+                    placeholder={"+998 94 600-00-21"}
+                    // max={"13"}
+                    inputType={"tel"}
+                  >
+                    Qo’shimcha tel raqam
+                  </InputText>
+                  <span className="add-post__input-sample">
+                    Namuna: +998 94 600-00-00
+                  </span>
+                </div>
               </div>
             </div>
             <div

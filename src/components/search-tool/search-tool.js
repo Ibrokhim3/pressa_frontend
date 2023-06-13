@@ -17,6 +17,7 @@ export const SearchTool = ({ style }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
   const [nameOpen, setNameOpen] = useState(false);
+  const [isRadio, setIsRadio] = useState("online");
 
   const handleToggleMenu = () => {
     setNavbarOpen((prev) => !prev);
@@ -33,6 +34,10 @@ export const SearchTool = ({ style }) => {
   const handleClickOutside = () => {
     setNavbarOpen(false);
     setTypeOpen(false);
+  };
+
+  const onValueChange = (evt) => {
+    setIsRadio(evt.currentTarget.value);
   };
 
   // const ref = useOutsideClick(handleClickOutside);
@@ -166,10 +171,13 @@ export const SearchTool = ({ style }) => {
             }`}
           >
             <InputRadio
+              checked1={isRadio === "online"}
+              checked2={isRadio === "offline"}
+              onChange={onValueChange}
               style={{ display: "flex", flexDirection: "column", gap: 29 }}
               postType={true}
-              value1={"Online"}
-              value2={"Offline"}
+              value1={"online"}
+              value2={"offline"}
             ></InputRadio>
           </div>
         </li>

@@ -10,12 +10,14 @@ import { Container } from "../../components/container/container";
 import { InputRadio } from "../../components";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { postsAction } from "../../store";
 import { API_URL } from "../../variables";
 
 export const AdminPanel = () => {
   const token = localStorage.getItem("token");
+
+  const [isRadio, setIsRadio] = useState("Eng yangilari");
 
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
     useSelector((state) => state.posts);
@@ -24,6 +26,10 @@ export const AdminPanel = () => {
 
   const handleSearchChange = (evt) => {
     dispatch(postsAction.setSearchValue(evt.target.value));
+  };
+
+  const onValueChange = (evt) => {
+    setIsRadio(evt.currentTarget.value);
   };
 
   const debouncedValue = useDebounce(searchValue, 500);
@@ -223,7 +229,10 @@ export const AdminPanel = () => {
               </li>
             </ul>
             <InputRadio
-              value1={"Eng so’ngilari"}
+              checked1={isRadio === "Eng yangilari"}
+              checked2={isRadio === "Oxirgilari"}
+              onChange={onValueChange}
+              value1={"Eng yangilari"}
               value2={"Oxirgilari"}
             ></InputRadio>
           </div>
