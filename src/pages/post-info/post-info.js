@@ -33,9 +33,9 @@ import { Link, useParams } from "react-router-dom";
 export const PostInfo = () => {
   const { id } = useParams();
 
-  const { list, loading, error } = useSelector((state) => state.posts);
+  let { list, loading, error } = useSelector((state) => state.posts);
 
-  const selectedModel = list?.find((item, index) => item._id === id);
+  const selectedPost = list?.find((item, index) => item._id === id);
 
   const {
     _id: postId,
@@ -54,7 +54,7 @@ export const PostInfo = () => {
     speakerName,
     speakerTelNum,
     speakerTelNum2,
-  } = selectedModel;
+  } = selectedPost;
 
   return (
     <div className="post-info">

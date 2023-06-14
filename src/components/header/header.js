@@ -41,7 +41,7 @@ export const Header = ({ style }) => {
             ulStyle={{ gap: "40px" }}
             navStyle={{ marginLeft: "103px" }}
           ></Navbar>
-          <Button to={"add-post"} style={{ marginLeft: "auto" }}>
+          <Button to={"/add-post"} style={{ marginLeft: "auto" }}>
             <img src={plusImg} alt="plus" />
             E’lon berish
           </Button>

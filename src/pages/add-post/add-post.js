@@ -38,7 +38,7 @@ export const AddPost = () => {
   const selectedCategory = options?.find((item) => item.category === direction);
 
   useEffect(() => {
-    fetch(`${API_URL}/get-main-categories`)
+    fetch(`${API_URL}/get-categories`)
       .then((res) => {
         if (res.status !== 200) {
           return res.text().then((text) => {

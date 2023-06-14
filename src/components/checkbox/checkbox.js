@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { postsAction } from "../../store";
 
-export const Checkbox = ({ children, value, style }) => {
+export const Checkbox = ({ children, value, style, onClick }) => {
   const dispatch = useDispatch();
 
   const handleSearchDirChange = (evt) => {
@@ -15,6 +15,7 @@ export const Checkbox = ({ children, value, style }) => {
       htmlFor="checkbox"
     >
       <input
+        onClick={onClick}
         value={value}
         onChange={handleSearchDirChange}
         id="checkbox"

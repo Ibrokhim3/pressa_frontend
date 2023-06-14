@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import categoryIcon from "../../assets/icons/category.svg";
@@ -6,6 +6,7 @@ import isOnlineIcon from "../../assets/icons/online.svg";
 import profileIcon from "../../assets/icons/profile.svg";
 import { useOutsideClick } from "../../hooks";
 import { postsAction } from "../../store";
+import { API_URL } from "../../variables";
 
 import { ArrowDown } from "../arrow-down";
 import { Checkbox } from "../checkbox";
@@ -18,6 +19,46 @@ export const SearchTool = ({ style }) => {
   const [typeOpen, setTypeOpen] = useState(false);
   const [nameOpen, setNameOpen] = useState(false);
   const [isRadio, setIsRadio] = useState("online");
+  const [categories, setCategory] = useState();
+  const [checkCategory, setCheckCategory] = useState([]);
+  const [checkNames, setCheckNames] = useState([]);
+  const [names, setNames] = useState();
+
+  useEffect(() => {
+    fetch(`${API_URL}/get-categories`, {})
+      .then((res) => {
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setCategory(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}/get-names`, {})
+      .then((res) => {
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setNames(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
 
   const handleToggleMenu = () => {
     setNavbarOpen((prev) => !prev);
@@ -48,14 +89,30 @@ export const SearchTool = ({ style }) => {
     dispatch(postsAction.setDateValue(evt.target.value));
   };
 
+  const categoryCheckHandler = (evt) => {
+    const value = evt.target.value;
+    setCheckCategory((prev) =>
+      checkCategory.includes(value)
+        ? prev.filter((cur) => cur !== value)
+        : [...prev, evt.target.value]
+    );
+  };
+
+  const namesCheckHandler = (evt) => {
+    const value = evt.target.value;
+    setCheckNames((prev) =>
+      checkNames.includes(value)
+        ? prev.filter((cur) => cur !== value)
+        : [...prev, evt.target.value]
+    );
+  };
+
   const handleBtnSearch = (evt) => {
     evt.preventDefault();
     // dispatch(postsAction.setFilterValue(evt.target.value));
-    console.log(evt.target.elements.inputDate.value);
     const {
       inputDate: { value: inputDate },
     } = evt.target.elements;
-    console.log();
   };
 
   return (
@@ -66,7 +123,7 @@ export const SearchTool = ({ style }) => {
           {/*shu divni component qilsa boladi*/}
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
-              onChange={handleSearchDateChange}
+              // onChange={handleSearchDateChange}
               id="inputDate"
               className="search-tool__input-date search-tool__input-date-style"
               type="date"
@@ -100,58 +157,20 @@ export const SearchTool = ({ style }) => {
               navbarOpen ? " search-tool__show-list" : ""
             }`}
           >
-            <li className="search-tool__dir-item">
-              <p className="search-tool__dir-item-text">IT</p>
-              <ul className="search-tool__dir-item-list">
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Web dasturlash"}>Web dasturlash</Checkbox>
-                </li>
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Mobile dasturlash"}>
-                    Mobile dasturlash
-                  </Checkbox>
-                </li>
-              </ul>
-            </li>
-            <li className="search-toxol__dir-item">
-              <p className="search-tool__dir-item-text">IT</p>
-              <ul className="search-tool__dir-item-list">
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Web dasturlash"}>Web dasturlash</Checkbox>
-                </li>
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Mobile dasturlash"}>
-                    Mobile dasturlash
-                  </Checkbox>
-                </li>
-              </ul>
-            </li>
-            <li className="search-tool__dir-item">
-              <p className="search-tool__dir-item-text">IT</p>
-              <ul className="search-tool__dir-item-list">
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Web dasturlash"}>Web dasturlash</Checkbox>
-                </li>
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Mobile dasturlash"}>
-                    Mobile dasturlash
-                  </Checkbox>
-                </li>
-              </ul>
-            </li>
-            <li className="search-tool__dir-item">
-              <p className="search-tool__dir-item-text">IT</p>
-              <ul className="search-tool__dir-item-list">
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Web dasturlash"}>Web dasturlash</Checkbox>
-                </li>
-                <li className="search-tool__dir-item-inner">
-                  <Checkbox value={"Mobile dasturlash"}>
-                    Mobile dasturlash
-                  </Checkbox>
-                </li>
-              </ul>
-            </li>
+            {categories?.map((item, index) => (
+              <li key={index} className="search-tool__dir-item">
+                <p className="search-tool__dir-item-text">{item.category}</p>
+                <ul className="search-tool__dir-item-list">
+                  {item?.subCategory?.map((item, index) => (
+                    <li key={index} className="search-tool__dir-item-inner">
+                      <Checkbox onClick={categoryCheckHandler} value={item}>
+                        {item}
+                      </Checkbox>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
           </ul>
         </li>
         <li className="search-tool__item search-tool__item-3">
@@ -196,24 +215,17 @@ export const SearchTool = ({ style }) => {
               nameOpen ? " search-tool__show-list" : ""
             }`}
           >
-            <li className="search-tool__dir-item-inner">
-              <Checkbox
-                style={{ gap: 15, width: 168 }}
-                value={"Web dasturlash"}
-              >
-                Abdulla Azizov
-              </Checkbox>
-            </li>
-            <li className="search-tool__dir-item-inner">
-              <Checkbox style={{ gap: 15 }} value={"Mobile dasturlash"}>
-                Akbar Turdiyev
-              </Checkbox>
-            </li>
-            <li className="search-tool__dir-item-inner">
-              <Checkbox style={{ gap: 15 }} value={"Mobile dasturlash"}>
-                Alisher Isaev
-              </Checkbox>
-            </li>
+            {names?.map((item, index) => (
+              <li key={index} className="search-tool__dir-item-inner">
+                <Checkbox
+                  onClick={namesCheckHandler}
+                  style={{ gap: 15, width: 168 }}
+                  value={item.name}
+                >
+                  {item.name}
+                </Checkbox>
+              </li>
+            ))}
           </ul>
         </li>
       </ul>
