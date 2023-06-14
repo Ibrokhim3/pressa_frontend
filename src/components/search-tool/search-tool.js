@@ -18,11 +18,13 @@ export const SearchTool = ({ style }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
   const [nameOpen, setNameOpen] = useState(false);
-  const [isRadio, setIsRadio] = useState("online");
+  const [isRadio, setIsRadio] = useState([]);
   const [categories, setCategory] = useState();
   const [checkCategory, setCheckCategory] = useState([]);
   const [checkNames, setCheckNames] = useState([]);
   const [names, setNames] = useState();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`${API_URL}/get-categories`, {})
@@ -83,8 +85,6 @@ export const SearchTool = ({ style }) => {
 
   // const ref = useOutsideClick(handleClickOutside);
 
-  const dispatch = useDispatch();
-
   const handleSearchDateChange = (evt) => {
     dispatch(postsAction.setDateValue(evt.target.value));
   };
@@ -107,16 +107,76 @@ export const SearchTool = ({ style }) => {
     );
   };
 
-  const handleBtnSearch = (evt) => {
+  const handleFormSearch = (evt) => {
     evt.preventDefault();
-    // dispatch(postsAction.setFilterValue(evt.target.value));
     const {
       inputDate: { value: inputDate },
     } = evt.target.elements;
+
+    const formData = new FormData();
+
+    formData.append("type", isRadio);
+    formData.append("date", inputDate);
+    formData.append("category", checkCategory);
+    formData.append("names", checkNames);
+
+    fetch(`${API_URL}/filter-active-posts`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        if (res.status !== 201) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(postsAction.setList(data));
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openFormatMenu, setOpenFormatMenu] = useState(false);
+  const [openNamesMenu, setOpenNamesMenu] = useState(false);
+
+  const ref = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (evt) => {
+      if (!ref?.current?.contains(evt.target)) {
+        setOpenMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+  }, [ref]);
+
+  useEffect(() => {
+    const handleClickOutsideFormat = (evt) => {
+      if (!ref2?.current?.contains(evt.target)) {
+        setOpenFormatMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideFormat);
+  }, [ref2]);
+
+  useEffect(() => {
+    const handleClickOutsideNames = (evt) => {
+      if (!ref3?.current?.contains(evt.target)) {
+        setOpenNamesMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideNames);
+  }, [ref3]);
+
   return (
-    <form onSubmit={handleBtnSearch} style={style} className="search-tool">
+    <form onSubmit={handleFormSearch} style={style} className="search-tool">
       <ul className="search-tool__list">
         {/*li ni component qilsa boladi*/}
         <li className="search-tool__item">
@@ -141,10 +201,9 @@ export const SearchTool = ({ style }) => {
             {/* </button> */}
           </label>
         </li>
-        <li className="search-tool__item search-tool__item-2">
+        <li ref={ref} className="search-tool__item search-tool__item-2">
           <div
-            // ref={ref}
-            onClick={handleToggleMenu}
+            onClick={() => setOpenMenu(!openMenu)}
             className="search-tool__item-wrapper"
           >
             <IconTool style={{ marginLeft: "13px" }} src={categoryIcon}>
@@ -152,31 +211,28 @@ export const SearchTool = ({ style }) => {
             </IconTool>
             <ArrowDown style={{ marginLeft: "15px" }}></ArrowDown>
           </div>
-          <ul
-            className={`search-tool__dir-list${
-              navbarOpen ? " search-tool__show-list" : ""
-            }`}
-          >
-            {categories?.map((item, index) => (
-              <li key={index} className="search-tool__dir-item">
-                <p className="search-tool__dir-item-text">{item.category}</p>
-                <ul className="search-tool__dir-item-list">
-                  {item?.subCategory?.map((item, index) => (
-                    <li key={index} className="search-tool__dir-item-inner">
-                      <Checkbox onClick={categoryCheckHandler} value={item}>
-                        {item}
-                      </Checkbox>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          {openMenu && (
+            <ul className="search-tool__dir-list">
+              {categories?.map((item, index) => (
+                <li key={index} className="search-tool__dir-item">
+                  <p className="search-tool__dir-item-text">{item.category}</p>
+                  <ul className="search-tool__dir-item-list">
+                    {item?.subCategory?.map((item, index) => (
+                      <li key={index} className="search-tool__dir-item-inner">
+                        <Checkbox onClick={categoryCheckHandler} value={item}>
+                          {item}
+                        </Checkbox>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
-        <li className="search-tool__item search-tool__item-3">
+        <li ref={ref2} className="search-tool__item search-tool__item-3">
           <div
-            // ref={ref}
-            onClick={handleToggleTypeMenu}
+            onClick={() => setOpenFormatMenu(!openFormatMenu)}
             className="search-tool__item-wrapper"
           >
             <IconTool style={{ marginLeft: "13px" }} src={isOnlineIcon}>
@@ -184,25 +240,24 @@ export const SearchTool = ({ style }) => {
             </IconTool>
             <ArrowDown style={{ marginLeft: "15px" }}></ArrowDown>
           </div>
-          <div
-            className={`search-tool__item-wrapper-type-wrapper${
-              typeOpen ? " search-tool__item-wrapper-type-wrapper-show" : ""
-            }`}
-          >
-            <InputRadio
-              checked1={isRadio === "online"}
-              checked2={isRadio === "offline"}
-              onChange={onValueChange}
-              style={{ display: "flex", flexDirection: "column", gap: 29 }}
-              postType={true}
-              value1={"online"}
-              value2={"offline"}
-            ></InputRadio>
-          </div>
+          {openFormatMenu && (
+            <div className="search-tool__item-wrapper-type-wrapper">
+              <InputRadio
+                // checked1={isRadio === "online"}
+                // checked2={isRadio === "offline"}
+                onChange={onValueChange}
+                style={{ display: "flex", flexDirection: "column", gap: 29 }}
+                postType={true}
+                value1={"online"}
+                value2={"offline"}
+              ></InputRadio>
+            </div>
+          )}
         </li>
-        <li className="search-tool__item search-tool__item-4">
+        <li ref={ref3} className="search-tool__item search-tool__item-4">
           <div
-            onClick={handleToggleNameMenu}
+            // onClick={handleToggleNameMenu}
+            onClick={() => setOpenNamesMenu(!openNamesMenu)}
             className="search-tool__item-wrapper search-tool__item-wrapper-4"
           >
             <IconTool style={{ marginLeft: "13px" }} src={profileIcon}>
@@ -210,23 +265,21 @@ export const SearchTool = ({ style }) => {
             </IconTool>
             <ArrowDown style={{ marginLeft: "15px" }}></ArrowDown>
           </div>
-          <ul
-            className={`search-tool__dir-list-2${
-              nameOpen ? " search-tool__show-list" : ""
-            }`}
-          >
-            {names?.map((item, index) => (
-              <li key={index} className="search-tool__dir-item-inner">
-                <Checkbox
-                  onClick={namesCheckHandler}
-                  style={{ gap: 15, width: 168 }}
-                  value={item.name}
-                >
-                  {item.name}
-                </Checkbox>
-              </li>
-            ))}
-          </ul>
+          {openNamesMenu && (
+            <ul className="search-tool__dir-list-2">
+              {names?.map((item, index) => (
+                <li key={index} className="search-tool__dir-item-inner">
+                  <Checkbox
+                    onClick={namesCheckHandler}
+                    style={{ gap: 15, width: 168 }}
+                    value={item.name}
+                  >
+                    {item.name}
+                  </Checkbox>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       </ul>
       <button type="submit" className="search-tool__button">

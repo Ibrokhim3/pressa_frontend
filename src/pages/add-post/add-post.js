@@ -97,15 +97,20 @@ export const AddPost = () => {
       inputTime: { value: postTime },
       dirSelect: { value: postDir },
       innerDirSelect: { value: postInnerDir },
-      inputLink: { value: postLink },
+      // inputLink: { value: postLink },
       inputName: { value: speakerName },
+      // inputFirmTitle: { value: firmTitle },
       inputJob: { value: speakerJob },
       inputPhone: { value: speakerTelNum },
-      inputAddPhone: { value: speakerTelNum2 },
+      // inputAddPhone: { value: speakerTelNum2 },
       inputTitle: { value: postTitle },
       inputDesc: { value: postDesc },
       inputTextarea: { value: postText },
     } = evt.target;
+
+    const postLink = evt.target.inputLink?.value;
+    const firmTitle = evt.target.inputFirmTitle?.value;
+    const speakerTelNum2 = evt.target.inputAddPhone?.value;
 
     // console.log(
     //   postDate,
@@ -132,6 +137,7 @@ export const AddPost = () => {
     formData.append("postType", inputValue);
     formData.append("postAuthor", radioValue);
     formData.append("postLink", postLink);
+    formData.append("firmTitle", firmTitle);
     formData.append("speakerName", speakerName);
     formData.append("speakerJob", speakerJob);
     formData.append("speakerTelNum", speakerTelNum);
@@ -288,8 +294,8 @@ export const AddPost = () => {
               <div className="add-post__form-personal-wrapper">
                 {radioValue === "Yuridik shaxs" && (
                   <InputText
-                    id={"inputName"}
-                    htmlFor={"inputName"}
+                    id={"inputFirmTitle"}
+                    htmlFor={"inputFirmTitle"}
                     style={{ marginBottom: "30px" }}
                   >
                     Yuridik nomi
@@ -316,7 +322,7 @@ export const AddPost = () => {
                     id={"inputPhone"}
                     htmlFor={"inputPhone"}
                     inputType={"tel"}
-                    pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+                    // pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
                     placeholder={"+998 94 600-00-20"}
                     // max={"13"}
                   >
@@ -331,7 +337,7 @@ export const AddPost = () => {
                   <InputText
                     id={"inputAddPhone"}
                     htmlFor={"inputAddPhone"}
-                    pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+                    // pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
                     placeholder={"+998 94 600-00-21"}
                     // max={"13"}
                     inputType={"tel"}
@@ -416,9 +422,11 @@ export const AddPost = () => {
             className="add-post__modal-close"
             onClick={() => (elModal.style.display = "none")}
           ></span>
-          <p className="add-post__modal-header">Sizning e’loningiz yuborildi</p>
+          <p className="add-post__modal-header">
+            Sizning e’loningiz moderatsiyaga yuborildi
+          </p>
           <p className="add-post__modal-text">
-            Yaqin soatlar ichda admin tomonidan tekshirib chiqladi va saytda
+            Yaqin soatlar ichida admin tomonidan tekshirib chiqiladi va saytda
             e’lon qilinadi!
           </p>
           <button

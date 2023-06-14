@@ -37,7 +37,6 @@ export const MainPage = () => {
       `${API_URL}/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
         date: dateValue,
-        // category: checkboxDirValue,
       })}`
     )
       .then((res) => {
