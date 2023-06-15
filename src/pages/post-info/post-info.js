@@ -30,11 +30,17 @@ import "swiper/swiper-bundle.min.css";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../variables";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 export const PostInfo = () => {
   const { id } = useParams();
 
   let { list, loading, error } = useSelector((state) => state.posts);
+
+  const [comments, setComments] = useState();
+  const [replyForm, setReplyForm] = useState(false);
+  const [limit, setLimit] = useState(1);
 
   const selectedPost = list?.find((item, index) => item._id === id);
 
@@ -57,6 +63,26 @@ export const PostInfo = () => {
     speakerTelNum2,
   } = selectedPost;
 
+  useEffect(() => {
+    fetch(`${API_URL}/get-comments`, {
+      headers: { id, limit },
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, [comments]);
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
@@ -66,6 +92,33 @@ export const PostInfo = () => {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify({ commentText, id }),
+    })
+      .then((res) => {
+        if (res.status !== 201) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        alert(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+  const handleReplySubmit = (evt) => {
+    evt.preventDefault();
+
+    const replyText = evt.target.replyText.value;
+    const commentId = evt.target.replyButton.dataset.id;
+
+    fetch(`${API_URL}/add-reply-to-comment`, {
+      method: "POST",
+      headers: { "Content-type": "Application/json" },
+      body: JSON.stringify({ replyText, id, commentId }),
     })
       .then((res) => {
         if (res.status !== 201) {
@@ -211,75 +264,127 @@ export const PostInfo = () => {
                 </button>
               </form>
               <ul className="post-info__comments-list">
-                <li className="post-info__comments-item-1">
-                  <div className="post-info__comment-item-wrapper">
-                    <img
-                      className="post-info__profile-img"
-                      width={50}
-                      height={50}
-                      src={profileImg}
-                      alt="profile-image"
-                    />
-                    <div className="post-info__comments-wrapper">
-                      <p className="post-info__comments-name">Ziyod</p>
-                      <span className="post-info__comments-time">
-                        Bugun 15:00
-                      </span>
-                      <p className="post-info__comment-view">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam etiam at nunc tempor ac.
-                      </p>
-                      <button className="post-info__comment-reply-button">
-                        <img
-                          className="post-info__profile-img"
-                          style={{ marginRight: "12px" }}
-                          src={replyIcon}
-                          alt="reply-icon"
-                        />
-                        Javob berish &nbsp;
-                        <span className="post-info__comment-reply-button">
-                          (12)
+                {comments?.map((item, index) => (
+                  <li key={index} className="post-info__comments-item-1">
+                    <div className="post-info__comment-item-wrapper">
+                      <img
+                        className="post-info__profile-img"
+                        width={50}
+                        height={50}
+                        src={profileImg}
+                        alt="profile-image"
+                      />
+                      <div className="post-info__comments-wrapper">
+                        <p className="post-info__comments-name">User</p>
+                        <span className="post-info__comments-time">
+                          {moment(item.time).fromNow()}
                         </span>
-                      </button>
-                    </div>
-                  </div>
-                  <ul className="post-info__comment-reply-list-1">
-                    <li className="post-info__comment-reply-item">
-                      <div className="post-info__comment-item-wrapper">
-                        <img
-                          className="post-info__profile-img"
-                          width={50}
-                          height={50}
-                          src={profileImg2}
-                          alt="profile-image"
-                        />
-                        <div className="post-info__comments-wrapper">
-                          <p className="post-info__comments-name">Ziyod</p>
-                          <span className="post-info__comments-time">
-                            Bugun 15:00
+                        <p className="post-info__comment-view">
+                          {item.commentText}
+                        </p>
+                        <button
+                          onClick={() => {
+                            setReplyForm(!replyForm);
+                          }}
+                          className="post-info__comment-reply-button"
+                        >
+                          <img
+                            className="post-info__profile-img"
+                            style={{ marginRight: "12px" }}
+                            src={replyIcon}
+                            alt="reply-icon"
+                          />
+                          Javob berish &nbsp;
+                          <span className="post-info__comment-reply-number">
+                            ({item.reply.length})
                           </span>
-                          <p className="post-info__comment-view">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Etiam etiam at nunc tempor ac.
-                          </p>
-                          <button className="post-info__comment-reply-button">
+                        </button>
+                        {replyForm && (
+                          <form
+                            onSubmit={handleReplySubmit}
+                            className="post-info__add-comment"
+                          >
                             <img
-                              style={{ marginRight: "12px" }}
-                              src={replyIcon}
-                              alt="reply-icon"
+                              className="post-info__profile-img"
+                              width={50}
+                              height={50}
+                              src={profileImg}
+                              alt="profile-image"
                             />
-                            Javob berish &nbsp;
-                            <span className="post-info__comment-reply-button">
-                              (12)
-                            </span>
-                          </button>
-                        </div>
+                            <div className="post-info__comment-wrapper">
+                              <textarea
+                                name=""
+                                id="replyText"
+                                className="post-info__comment-text"
+                                placeholder="Javob yozing..."
+                                cols="30"
+                                rows="10"
+                                maxLength={100}
+                              ></textarea>
+                            </div>
+                            <button
+                              id="replyButton"
+                              data-id={item._id}
+                              className="post-info__comment-button"
+                              type="submit"
+                            >
+                              Yuborish
+                            </button>
+                          </form>
+                        )}
                       </div>
-                    </li>
-                  </ul>
-                </li>
+                    </div>
+                    {replyForm && (
+                      <ul className="post-info__comment-reply-list-1">
+                        {item?.reply?.map((item, index) => {
+                          return (
+                            <li
+                              key={index}
+                              className="post-info__comment-reply-item"
+                            >
+                              <div className="post-info__comment-item-wrapper">
+                                <img
+                                  className="post-info__profile-img"
+                                  width={50}
+                                  height={50}
+                                  src={profileImg2}
+                                  alt="profile-image"
+                                />
+                                <div className="post-info__comments-wrapper">
+                                  <p className="post-info__comments-name">
+                                    User2
+                                  </p>
+                                  <span className="post-info__comments-time">
+                                    {moment(item.time).fromNow()}
+                                  </span>
+                                  <p className="post-info__comment-view">
+                                    {item.replyText}
+                                  </p>
+                                  <button className="post-info__comment-reply-button">
+                                    <img
+                                      style={{ marginRight: "12px" }}
+                                      src={replyIcon}
+                                      alt="reply-icon"
+                                    />
+                                    Javob berish &nbsp;
+                                    <span className="post-info__comment-reply-number">
+                                      (12)
+                                    </span>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </li>
+                ))}
               </ul>
-              <button className="post-info__see-more">
+              <button
+                onClick={() => setLimit(limit + 10)}
+                className="post-info__see-more"
+              >
                 Ko’proq ko’rish...
               </button>
             </Container>

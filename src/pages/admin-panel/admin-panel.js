@@ -17,10 +17,12 @@ import { API_URL } from "../../variables";
 export const AdminPanel = () => {
   const token = localStorage.getItem("token");
 
-  const [isRadio, setIsRadio] = useState("Eng yangilari");
+  const [isRadio, setIsRadio] = useState("asc");
 
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
     useSelector((state) => state.posts);
+
+  const [postList, setPostList] = useState();
 
   const dispatch = useDispatch();
 
@@ -38,6 +40,7 @@ export const AdminPanel = () => {
     fetch(
       `${API_URL}/get-moderating-posts?${new URLSearchParams({
         search: debouncedValue,
+        sort: isRadio,
       })}`,
       {
         method: "GET",
@@ -53,12 +56,40 @@ export const AdminPanel = () => {
         return res.json();
       })
       .then((data) => {
-        dispatch(postsAction.setList(data));
+        console.log(data);
+        setPostList(data);
+        // dispatch(postsAction.setList(data));
       })
       .catch((err) => {
         alert(err);
       });
-  }, [debouncedValue, list]);
+  }, [postList?.length, debouncedValue]);
+
+  // useEffect(() => {
+  //   fetch(
+  //     `${API_URL}/get-active-posts?${new URLSearchParams({
+  //       search: debouncedValue,
+  //     })}`,
+  //     {
+  //       method: "GET",
+  //       headers: { "Content-type": "Application/json", token },
+  //     }
+  //   )
+  //     .then((res) => {
+  //       if (res.status !== 200) {
+  //         return res.text().then((text) => {
+  //           throw new Error(text);
+  //         });
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       dispatch(postsAction.setList(data));
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // }, [debouncedValue, list]);
 
   const onBtnClick = (evt) => {
     evt.preventDefault();
@@ -229,11 +260,13 @@ export const AdminPanel = () => {
               </li>
             </ul>
             <InputRadio
-              checked1={isRadio === "Eng yangilari"}
-              checked2={isRadio === "Oxirgilari"}
+              checked1={isRadio === "asc"}
+              checked2={isRadio === "desc"}
               onChange={onValueChange}
-              value1={"Eng yangilari"}
-              value2={"Oxirgilari"}
+              label1={"Eng yangilari"}
+              label2={"Eng oxirgilari"}
+              value1={"asc"}
+              value2={"desc"}
             ></InputRadio>
           </div>
         </Container>
@@ -244,7 +277,7 @@ export const AdminPanel = () => {
           <p className="admin-panel__top-text">Eng so’ngi xabarnomalar</p>
 
           <ul className="admin-panel__posts">
-            {list?.map((item, index) => (
+            {postList?.map((item, index) => (
               <li key={index} className="admin-panel__post-item">
                 <div className="admin-panel__post-top-wrapper">
                   <p className="admin-panel__post-item-text">
@@ -275,7 +308,6 @@ export const AdminPanel = () => {
                     {item.speakerName}
                   </li>
                   <li className="admin-panel__info-item">
-                    {" "}
                     {item.speakerTelNum}
                   </li>
                   <li className="admin-panel__info-item"> {item.postDate}</li>

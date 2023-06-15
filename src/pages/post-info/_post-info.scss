@@ -110,8 +110,10 @@
 
 .post-info__comment-text {
   margin-left: auto;
+  width: 100%;
   max-width: 407px;
-
+  font-size: 14px;
+  line-height: 17px;
   height: 140px;
   padding: 20px;
   background: #ffffff;
@@ -201,6 +203,7 @@
   border: 0;
   outline: 0;
   margin: 0;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   font-size: 15px;
@@ -208,6 +211,12 @@
   color: $text-color;
   opacity: 0.5;
   cursor: pointer;
+}
+
+.post-info__comment-reply-number {
+  font-size: 15px;
+  line-height: 18px;
+  color: $text-color;
 }
 
 .post-info__see-more {
@@ -218,6 +227,7 @@
   line-height: 18px;
   color: $accent-color;
   margin-left: 134px;
+  cursor: pointer;
 }
 
 .post-info__reccomended-text {

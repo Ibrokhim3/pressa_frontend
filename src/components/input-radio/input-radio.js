@@ -3,6 +3,8 @@ import offLineIcon from "../../assets/icons/post-offline.svg";
 
 export const InputRadio = ({
   style,
+  label1,
+  label2,
   value1,
   value2,
   postType,
@@ -14,7 +16,7 @@ export const InputRadio = ({
     <ul style={style} className="radio-list">
       <li className="radio-item">
         <label for="radio1" className="radio-text">
-          {value1}
+          {label1}
         </label>
 
         {postType && <img src={onlineIcon} alt="online" />}
@@ -30,7 +32,7 @@ export const InputRadio = ({
       </li>
       <li className="radio-item">
         <label for="radio2" className="radio-text">
-          {value2}
+          {label2}
         </label>
         {postType && <img src={offLineIcon} alt="offline" />}
         <input
