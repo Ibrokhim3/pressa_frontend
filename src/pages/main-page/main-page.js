@@ -13,7 +13,7 @@ import personInSuitWebp from "../../assets/images/img-bottom.webp";
 import personInSuitPng2x from "../../assets/images/img-bottom@2x.png";
 import personInSuitWebp2x from "../../assets/images/img-bottom@2x.webp";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import personInSuit2Png from "../../assets/images/img-bottom2.png";
 import personInSuit2Webp from "../../assets/images/img-bottom2.webp";
@@ -28,6 +28,8 @@ export const MainPage = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
     useSelector((state) => state.posts);
 
+  const [limit, setLimit] = useState(9);
+
   const dispatch = useDispatch();
 
   const debouncedValue = useDebounce(searchValue, 500);
@@ -36,7 +38,8 @@ export const MainPage = () => {
     fetch(
       `${API_URL}/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
-        date: dateValue,
+        limit: limit,
+        // date: dateValue,
       })}`
     )
       .then((res) => {
@@ -51,7 +54,7 @@ export const MainPage = () => {
       .catch((err) => {
         return console.log(err);
       });
-  }, [debouncedValue, dateValue]);
+  }, [limit, debouncedValue]);
 
   return (
     <div className="main-page__top">
@@ -73,7 +76,10 @@ export const MainPage = () => {
               ))}
               {/* <PostItem /> */}
             </ul>
-            <Button style={{ background: "#006AFF", margin: "0 auto" }}>
+            <Button
+              onClick={() => setLimit(limit + 9)}
+              style={{ background: "#006AFF", margin: "0 auto" }}
+            >
               Ko’proq ko’rish
             </Button>
           </section>

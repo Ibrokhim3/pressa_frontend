@@ -20,9 +20,9 @@ export const SearchTool = ({ style }) => {
   const [nameOpen, setNameOpen] = useState(false);
   const [isRadio, setIsRadio] = useState([]);
   const [categories, setCategory] = useState();
+  const [names, setNames] = useState();
   const [checkCategory, setCheckCategory] = useState([]);
   const [checkNames, setCheckNames] = useState([]);
-  const [names, setNames] = useState();
 
   const dispatch = useDispatch();
 
@@ -115,6 +115,8 @@ export const SearchTool = ({ style }) => {
 
     const formData = new FormData();
 
+    console.log(checkCategory);
+
     formData.append("type", isRadio);
     formData.append("date", inputDate);
     formData.append("category", checkCategory);
@@ -138,6 +140,9 @@ export const SearchTool = ({ style }) => {
       .catch((err) => {
         alert(err);
       });
+    setIsRadio([]);
+    setCheckCategory([]);
+    setCheckNames([]);
   };
 
   const [openMenu, setOpenMenu] = useState(false);

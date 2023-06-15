@@ -142,7 +142,10 @@ export const AddPost = () => {
     formData.append("speakerJob", speakerJob);
     formData.append("speakerTelNum", speakerTelNum);
     formData.append("speakerTelNum2", speakerTelNum2);
-    formData.append("postTitle", postTitle);
+    formData.append(
+      "postTitle",
+      postTitle.charAt(0).toUpperCase() + postTitle.slice(1)
+    );
     formData.append("postImg", file);
     formData.append("postDesc", postDesc);
     formData.append("postText", postText);
@@ -163,6 +166,7 @@ export const AddPost = () => {
         alert(data);
         elModal.style.display = "block";
         dispatch(postsAction.setLoading(false));
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
