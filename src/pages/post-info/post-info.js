@@ -20,8 +20,8 @@ import postImg from "../../assets/images/img-2.jpg";
 import loactionIcon from "../../assets/icons/location.svg";
 import youtubeIcon from "../../assets/icons/youtube.svg";
 import commentIcon from "../../assets/icons/comments.svg";
-import profileImg from "../../assets/icons/profile-unsplash.svg";
-import profileImg2 from "../../assets/icons/profile-2.svg";
+import profileImg from "../../assets/images/1.jpg";
+import profileImg2 from "../../assets/images/2.jpg";
 import replyIcon from "../../assets/icons/reply.svg";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -29,6 +29,7 @@ import { Navigation, Pagination, Scrollbar, A11y, EffectCube } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { API_URL } from "../../variables";
 
 export const PostInfo = () => {
   const { id } = useParams();
@@ -55,6 +56,32 @@ export const PostInfo = () => {
     speakerTelNum,
     speakerTelNum2,
   } = selectedPost;
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    const commentText = evt.target.commentText.value;
+
+    fetch(`${API_URL}/add-comment`, {
+      method: "POST",
+      headers: { "Content-type": "Application/json" },
+      body: JSON.stringify({ commentText, id }),
+    })
+      .then((res) => {
+        if (res.status !== 201) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        alert(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   return (
     <div className="post-info">
@@ -157,16 +184,26 @@ export const PostInfo = () => {
               <p className="post-info__comments-text">
                 <img src={commentIcon} alt="comments" /> Izohlar
               </p>
-              <form className="post-info__add-comment">
+              <form
+                onSubmit={handleFormSubmit}
+                className="post-info__add-comment"
+              >
                 <div className="post-info__comment-wrapper">
-                  <img src={profileImg} alt="profile-image" />
+                  <img
+                    className="post-info__profile-img"
+                    width={50}
+                    height={50}
+                    src={profileImg}
+                    alt="profile-image"
+                  />
                   <textarea
+                    name=""
+                    id="commentText"
                     className="post-info__comment-text"
                     placeholder="Izoh yozing..."
-                    name=""
-                    // id=""
                     cols="30"
                     rows="10"
+                    maxLength={100}
                   ></textarea>
                 </div>
                 <button className="post-info__comment-button" type="submit">
@@ -176,9 +213,15 @@ export const PostInfo = () => {
               <ul className="post-info__comments-list">
                 <li className="post-info__comments-item-1">
                   <div className="post-info__comment-item-wrapper">
-                    <img src={profileImg} alt="profile-image" />
+                    <img
+                      className="post-info__profile-img"
+                      width={50}
+                      height={50}
+                      src={profileImg}
+                      alt="profile-image"
+                    />
                     <div className="post-info__comments-wrapper">
-                      <p className="post-info__comments-name">Angella</p>
+                      <p className="post-info__comments-name">Ziyod</p>
                       <span className="post-info__comments-time">
                         Bugun 15:00
                       </span>
@@ -188,6 +231,7 @@ export const PostInfo = () => {
                       </p>
                       <button className="post-info__comment-reply-button">
                         <img
+                          className="post-info__profile-img"
                           style={{ marginRight: "12px" }}
                           src={replyIcon}
                           alt="reply-icon"
@@ -202,9 +246,15 @@ export const PostInfo = () => {
                   <ul className="post-info__comment-reply-list-1">
                     <li className="post-info__comment-reply-item">
                       <div className="post-info__comment-item-wrapper">
-                        <img src={profileImg2} alt="profile-image" />
+                        <img
+                          className="post-info__profile-img"
+                          width={50}
+                          height={50}
+                          src={profileImg2}
+                          alt="profile-image"
+                        />
                         <div className="post-info__comments-wrapper">
-                          <p className="post-info__comments-name">Angella</p>
+                          <p className="post-info__comments-name">Ziyod</p>
                           <span className="post-info__comments-time">
                             Bugun 15:00
                           </span>
