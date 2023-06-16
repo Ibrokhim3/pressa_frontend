@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Container } from "../../components";
-import { postsAction } from "../../store";
+import { postsAction, userAction } from "../../store";
 import { API_URL } from "../../variables";
 
 export const LoginPage = () => {
@@ -31,13 +31,13 @@ export const LoginPage = () => {
       password,
     };
 
-    fetch(`${API_URL}/pressa/login`, {
+    fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify(user),
     })
       .then((res) => {
-        if (res.status !== 200) {
+        if (res.status !== 201) {
           return res.text().then((text) => {
             throw new Error(text);
           });
@@ -45,9 +45,11 @@ export const LoginPage = () => {
         return res.json();
       })
       .then((data) => {
+        // dispatch(userAction.setLogin(data));
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", data.userRole);
         dispatch(postsAction.setLoading(false));
-        navigate("/admin-panel");
+        navigate("/");
       })
       .catch((err) => {
         alert(err);

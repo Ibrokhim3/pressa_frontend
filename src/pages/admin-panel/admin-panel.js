@@ -22,7 +22,10 @@ export const AdminPanel = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
     useSelector((state) => state.posts);
 
+  const [listStatus, setListStatus] = useState("moderating");
   const [postList, setPostList] = useState(null);
+  const [activePostList, setActivePostList] = useState(null);
+  const [rejectedPostList, setRejectedPostList] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -38,7 +41,7 @@ export const AdminPanel = () => {
 
   useEffect(() => {
     fetch(
-      `${API_URL}/pressa/get-moderating-posts?${new URLSearchParams({
+      `${API_URL}/get-moderating-posts?${new URLSearchParams({
         search: debouncedValue,
         sort: isRadio,
       })}`,
@@ -64,31 +67,58 @@ export const AdminPanel = () => {
       });
   }, [postList, debouncedValue]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `${API_URL}/get-active-posts?${new URLSearchParams({
-  //       search: debouncedValue,
-  //     })}`,
-  //     {
-  //       method: "GET",
-  //       headers: { "Content-type": "Application/json", token },
-  //     }
-  //   )
-  //     .then((res) => {
-  //       if (res.status !== 200) {
-  //         return res.text().then((text) => {
-  //           throw new Error(text);
-  //         });
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       dispatch(postsAction.setList(data));
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // }, [debouncedValue, list]);
+  useEffect(() => {
+    fetch(
+      `${API_URL}/get-active-posts?${new URLSearchParams({
+        search: debouncedValue,
+      })}`,
+      {
+        method: "GET",
+        headers: { "Content-type": "Application/json", token },
+      }
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setActivePostList(data);
+        // dispatch(postsAction.setList(data));
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, [debouncedValue, list]);
+
+  useEffect(() => {
+    fetch(
+      `${API_URL}/get-rejected-posts?${new URLSearchParams({
+        search: debouncedValue,
+      })}`,
+      {
+        method: "GET",
+        headers: { "Content-type": "Application/json", token },
+      }
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setRejectedPostList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, [debouncedValue, list]);
 
   const onBtnClick = (evt) => {
     evt.preventDefault();
@@ -96,16 +126,18 @@ export const AdminPanel = () => {
     const id = evt.target.dataset.id;
     const type = evt.target.dataset.type;
 
-    fetch(`${API_URL}/pressa/moderate-post`, {
+    fetch(`${API_URL}/moderate-post`, {
       method: "POST",
       headers: { "Content-type": "Application/json", token },
       body: JSON.stringify({ type, id }),
     })
       .then((res) => {
-        if (res.status === 201) {
-          return res.json();
+        if (res.status !== 201) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         }
-        return Promise.reject(res);
+        return res.json();
       })
       .then((data) => {
         alert(data);
@@ -114,6 +146,15 @@ export const AdminPanel = () => {
         alert(err);
       });
   };
+
+  let selectedList =
+    listStatus === "moderating"
+      ? postList
+      : listStatus === "active"
+      ? activePostList
+      : listStatus === "rejected"
+      ? rejectedPostList
+      : postList;
 
   // const onBtnCancel = (evt) => {
   //   evt.preventDefault();
@@ -173,7 +214,9 @@ export const AdminPanel = () => {
           </li>
           <li className="admin-panel__setting-item">
             <Link
-              onClick={localStorage.setItem("token", "")}
+              onClick={() => {
+                localStorage.clear();
+              }}
               to={"/login"}
               className="admin-panel__setting-link"
             >
@@ -196,8 +239,8 @@ export const AdminPanel = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M14.8688 13.4575C17.3126 10.319 17.0918 5.77838 14.2067 2.89319C11.0825 -0.231 6.01714 -0.231 2.89295 2.89319C-0.231244 6.01739 -0.231244 11.0827 2.89295 14.2069C5.77813 17.0921 10.3188 17.3128 13.4573 14.8691C13.4708 14.8844 13.4849 14.8994 13.4996 14.914L17.7422 19.1567C18.1327 19.5472 18.7659 19.5472 19.1564 19.1567C19.5469 18.7661 19.5469 18.133 19.1564 17.7424L14.9138 13.4998C14.8991 13.4852 14.8841 13.4711 14.8688 13.4575ZM12.7924 4.30741C15.1356 6.65055 15.1356 10.4495 12.7924 12.7927C10.4493 15.1358 6.65031 15.1358 4.30716 12.7927C1.96402 10.4495 1.96402 6.65055 4.30716 4.30741C6.65031 1.96426 10.4493 1.96426 12.7924 4.30741Z"
               />
             </svg>
@@ -243,17 +286,39 @@ export const AdminPanel = () => {
           <div className="admin-panel__filter">
             <ul className="admin-panel__filter-list">
               <li className="admin-panel__filter-item">
-                <button className="admin-panel__filter-button">
+                <button
+                  onClick={() => setListStatus("moderating")}
+                  className={`admin-panel__filter-button${
+                    listStatus === "moderating"
+                      ? " admin-panel__filter-button--checked"
+                      : ""
+                  }`}
+                >
                   Kutilmoqda
                 </button>
               </li>
               <li className="admin-panel__filter-item">
-                <button className="admin-panel__filter-button admin-panel__filter-button--uncheked">
+                <button
+                  onClick={() => setListStatus("active")}
+                  className={`admin-panel__filter-button${
+                    listStatus === "active"
+                      ? " admin-panel__filter-button--checked"
+                      : ""
+                  }`}
+                >
                   Qabul qiligan
                 </button>
               </li>
               <li className="admin-panel__filter-item">
-                <button className="admin-panel__filter-button admin-panel__filter-button--uncheked">
+                <button
+                  onClick={() => setListStatus("rejected")}
+                  c
+                  className={`admin-panel__filter-button${
+                    listStatus === "rejected"
+                      ? " admin-panel__filter-button--checked"
+                      : ""
+                  }`}
+                >
                   Rad etilgan
                 </button>
               </li>
@@ -276,7 +341,7 @@ export const AdminPanel = () => {
           <p className="admin-panel__top-text">Eng so’ngi xabarnomalar</p>
 
           <ul className="admin-panel__posts">
-            {postList?.map((item, index) => (
+            {selectedList?.map((item, index) => (
               <li key={index} className="admin-panel__post-item">
                 <div className="admin-panel__post-top-wrapper">
                   <p className="admin-panel__post-item-text">

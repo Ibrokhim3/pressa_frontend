@@ -1,3 +1,3 @@
-export const API_URL = "https://pressa-ibrokhim.onrender.com";
+export const API_URL = "http://localhost:2001/pressa";
 
-// ("http://localhost:2001/pressa");
+// ("https://pressa-ibrokhim.onrender.com");

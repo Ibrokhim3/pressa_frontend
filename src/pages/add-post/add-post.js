@@ -38,7 +38,7 @@ export const AddPost = () => {
   const selectedCategory = options?.find((item) => item.category === direction);
 
   useEffect(() => {
-    fetch(`${API_URL}/pressa/get-categories`)
+    fetch(`${API_URL}/get-categories`)
       .then((res) => {
         if (res.status !== 200) {
           return res.text().then((text) => {
@@ -150,7 +150,7 @@ export const AddPost = () => {
     formData.append("postDesc", postDesc);
     formData.append("postText", postText);
 
-    fetch(`${API_URL}/pressa//add-post`, {
+    fetch(`${API_URL}/add-post`, {
       method: "POST",
       body: formData,
     })
@@ -166,7 +166,7 @@ export const AddPost = () => {
         alert(data);
         elModal.style.display = "block";
         dispatch(postsAction.setLoading(false));
-        navigate("/");
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -426,7 +426,10 @@ export const AddPost = () => {
         <div className="add-post__modal-content">
           <span
             className="add-post__modal-close"
-            onClick={() => (elModal.style.display = "none")}
+            onClick={() => {
+              elModal.style.display = "none";
+              navigate("/");
+            }}
           ></span>
           <p className="add-post__modal-header">
             Sizning e’loningiz moderatsiyaga yuborildi
@@ -437,7 +440,10 @@ export const AddPost = () => {
           </p>
           <button
             className="add-post__modal-button"
-            onClick={() => (elModal.style.display = "none")}
+            onClick={() => {
+              elModal.style.display = "none";
+              navigate("/");
+            }}
           >
             Ok
           </button>

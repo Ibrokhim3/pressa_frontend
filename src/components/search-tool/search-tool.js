@@ -27,7 +27,7 @@ export const SearchTool = ({ style }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`${API_URL}/pressa/get-categories`, {})
+    fetch(`${API_URL}/get-categories`, {})
       .then((res) => {
         if (res.status !== 200) {
           return res.text().then((text) => {
@@ -45,7 +45,7 @@ export const SearchTool = ({ style }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}/pressa/get-names`, {})
+    fetch(`${API_URL}/get-names`, {})
       .then((res) => {
         if (res.status !== 200) {
           return res.text().then((text) => {
@@ -122,7 +122,7 @@ export const SearchTool = ({ style }) => {
     formData.append("category", checkCategory);
     formData.append("names", checkNames);
 
-    fetch(`${API_URL}/pressa/filter-active-posts`, {
+    fetch(`${API_URL}/filter-active-posts`, {
       method: "POST",
       body: formData,
     })

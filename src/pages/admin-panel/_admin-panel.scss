@@ -156,25 +156,27 @@
 //filter
 
 .admin-panel__filter-button {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 20px;
-  color: $white;
-  padding: 15px 25px;
-  background: #016bff;
-  border-radius: 50px;
-  border: 0;
-  cursor: pointer;
-}
-
-.admin-panel__filter-button--uncheked {
   background: transparent;
   border: 0;
+  padding: 15px 25px;
   font-weight: 500;
   font-size: 17px;
   line-height: 20px;
   color: #193951;
   opacity: 0.4;
+  cursor: pointer;
+}
+
+.admin-panel__filter-button--checked {
+  background: #016bff;
+  opacity: 1;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  color: $white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  border: 0;
   cursor: pointer;
 }
 
