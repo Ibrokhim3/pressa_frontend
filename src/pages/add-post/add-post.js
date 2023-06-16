@@ -38,7 +38,7 @@ export const AddPost = () => {
   const selectedCategory = options?.find((item) => item.category === direction);
 
   useEffect(() => {
-    fetch(`${API_URL}/get-categories`)
+    fetch(`${API_URL}/pressa/get-categories`)
       .then((res) => {
         if (res.status !== 200) {
           return res.text().then((text) => {
@@ -150,7 +150,7 @@ export const AddPost = () => {
     formData.append("postDesc", postDesc);
     formData.append("postText", postText);
 
-    fetch(`${API_URL}/add-post`, {
+    fetch(`${API_URL}/pressa//add-post`, {
       method: "POST",
       body: formData,
     })
@@ -290,6 +290,8 @@ export const AddPost = () => {
               style={{ marginBottom: "8px" }}
               value1={"Jismoniy shaxs"}
               value2={"Yuridik shaxs"}
+              label1={"Jismoniy shaxs"}
+              label2={"Yuridik shaxs"}
             ></InputRadio>
             <div
               style={{ marginBottom: "53px", paddingBottom: "28px" }}

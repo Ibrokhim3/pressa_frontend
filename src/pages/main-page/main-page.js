@@ -36,7 +36,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     fetch(
-      `${API_URL}/get-active-posts?${new URLSearchParams({
+      `${API_URL}/pressa/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
         limit: limit,
         // date: dateValue,

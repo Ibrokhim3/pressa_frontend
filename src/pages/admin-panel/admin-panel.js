@@ -22,7 +22,7 @@ export const AdminPanel = () => {
   const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
     useSelector((state) => state.posts);
 
-  const [postList, setPostList] = useState();
+  const [postList, setPostList] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ export const AdminPanel = () => {
 
   useEffect(() => {
     fetch(
-      `${API_URL}/get-moderating-posts?${new URLSearchParams({
+      `${API_URL}/pressa/get-moderating-posts?${new URLSearchParams({
         search: debouncedValue,
         sort: isRadio,
       })}`,
@@ -56,14 +56,13 @@ export const AdminPanel = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setPostList(data);
         // dispatch(postsAction.setList(data));
       })
       .catch((err) => {
         alert(err);
       });
-  }, [postList?.length, debouncedValue]);
+  }, [postList, debouncedValue]);
 
   // useEffect(() => {
   //   fetch(
@@ -97,7 +96,7 @@ export const AdminPanel = () => {
     const id = evt.target.dataset.id;
     const type = evt.target.dataset.type;
 
-    fetch(`${API_URL}/moderate-post`, {
+    fetch(`${API_URL}/pressa/moderate-post`, {
       method: "POST",
       headers: { "Content-type": "Application/json", token },
       body: JSON.stringify({ type, id }),

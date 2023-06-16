@@ -31,7 +31,7 @@ export const LoginPage = () => {
       password,
     };
 
-    fetch(`${API_URL}/login`, {
+    fetch(`${API_URL}/pressa/login`, {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify(user),

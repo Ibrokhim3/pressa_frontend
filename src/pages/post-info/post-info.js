@@ -64,7 +64,7 @@ export const PostInfo = () => {
   } = selectedPost;
 
   useEffect(() => {
-    fetch(`${API_URL}/get-comments`, {
+    fetch(`${API_URL}/pressa/get-comments`, {
       headers: { id, limit },
     })
       .then((res) => {
@@ -88,7 +88,7 @@ export const PostInfo = () => {
 
     const commentText = evt.target.commentText.value;
 
-    fetch(`${API_URL}/add-comment`, {
+    fetch(`${API_URL}/pressa/add-comment`, {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify({ commentText, id }),
@@ -115,7 +115,7 @@ export const PostInfo = () => {
     const replyText = evt.target.replyText.value;
     const commentId = evt.target.replyButton.dataset.id;
 
-    fetch(`${API_URL}/add-reply-to-comment`, {
+    fetch(`${API_URL}/pressa/add-reply-to-comment`, {
       method: "POST",
       headers: { "Content-type": "Application/json" },
       body: JSON.stringify({ replyText, id, commentId }),
