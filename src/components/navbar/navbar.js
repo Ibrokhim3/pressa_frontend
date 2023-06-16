@@ -23,7 +23,6 @@ export const Navbar = ({ style, navStyle, ulStyle }) => {
               ? "Admin panel"
               : "Savol va javoblar"}
           </Link>
-          <Link to={"/login"}>Login</Link>
         </li>
       </ul>
     </nav>
