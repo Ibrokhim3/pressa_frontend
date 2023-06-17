@@ -165,12 +165,13 @@ export const AddPost = () => {
       .then((data) => {
         alert(data);
         elModal.style.display = "block";
-        dispatch(postsAction.setLoading(false));
-        // navigate("/");
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err);
         alert(err);
+      })
+      .finally(() => {
+        dispatch(postsAction.setLoading(false));
       });
   };
 
