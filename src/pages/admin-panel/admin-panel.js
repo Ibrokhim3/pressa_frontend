@@ -349,7 +349,7 @@ export const AdminPanel = () => {
                   <p className="admin-panel__post-item-text">
                     {item.postTitle}
                   </p>
-                  {listStatus === "active" && listStatus === "rejected" && (
+                  {listStatus === "moderating" && (
                     <div className="admin-panel__buttons">
                       <button
                         data-type="false"
