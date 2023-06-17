@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import categoryIcon from "../../assets/icons/category.svg";
 import isOnlineIcon from "../../assets/icons/online.svg";
@@ -25,6 +25,9 @@ export const SearchTool = ({ style }) => {
   const [checkNames, setCheckNames] = useState([]);
 
   const dispatch = useDispatch();
+
+  const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
+    useSelector((state) => state.posts);
 
   useEffect(() => {
     fetch(`${API_URL}/get-categories`, {})
@@ -109,6 +112,7 @@ export const SearchTool = ({ style }) => {
 
   const handleFormSearch = (evt) => {
     evt.preventDefault();
+    dispatch(postsAction.setLoading(true));
     const {
       inputDate: { value: inputDate },
     } = evt.target.elements;

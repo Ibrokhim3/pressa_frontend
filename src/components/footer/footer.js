@@ -15,9 +15,11 @@ export const Footer = () => {
             Pressa
           </Link>
           <Navbar
+            footer={true}
             ulStyle={{ gap: "77px" }}
             style={{ fontWeight: "500" }}
           ></Navbar>
+
           <img
             className="footer__phone-icon"
             src={phoneIcon}

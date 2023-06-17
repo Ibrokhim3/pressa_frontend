@@ -90,7 +90,7 @@ export const AddPost = () => {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // dispatch(postsAction.setLoading(true));
+    dispatch(postsAction.setLoading(true));
 
     const {
       inputDate: { value: postDate },
@@ -405,18 +405,21 @@ export const AddPost = () => {
                   placeholder="Mavzu matni"
                 ></textarea>
               </label>
-              <Link to={"/"} className="add-post__form-cancel-button">
-                Bekor qilish
-              </Link>
-              <button
-                id="submitBtn"
-                disabled={loading}
-                type="submit"
-                style={styles}
-                className="add-post__form-submit-button"
-              >
-                E’lonni yuborish
-              </button>
+              <div className="add-post__button-wrapper">
+                <Link to={"/"} className="add-post__form-cancel-button">
+                  Bekor qilish
+                </Link>
+                <button
+                  id="submitBtn"
+                  disabled={loading}
+                  type="submit"
+                  style={styles}
+                  className="add-post__form-submit-button"
+                >
+                  E’lonni yuborish
+                </button>
+                {loading && <div className="button-loader"></div>}
+              </div>
             </div>
           </form>
         </Container>

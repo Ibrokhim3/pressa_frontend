@@ -65,12 +65,13 @@ export const AdminPanel = () => {
       .catch((err) => {
         alert(err);
       });
-  }, [postList, debouncedValue]);
+  }, [postList, debouncedValue, isRadio]);
 
   useEffect(() => {
     fetch(
       `${API_URL}/get-active-posts?${new URLSearchParams({
         search: debouncedValue,
+        sort: isRadio,
       })}`,
       {
         method: "GET",
@@ -92,12 +93,13 @@ export const AdminPanel = () => {
       .catch((err) => {
         alert(err);
       });
-  }, [debouncedValue, list]);
+  }, [debouncedValue, list, isRadio]);
 
   useEffect(() => {
     fetch(
       `${API_URL}/get-rejected-posts?${new URLSearchParams({
         search: debouncedValue,
+        sort: isRadio,
       })}`,
       {
         method: "GET",
@@ -118,7 +120,7 @@ export const AdminPanel = () => {
       .catch((err) => {
         alert(err);
       });
-  }, [debouncedValue, list]);
+  }, [debouncedValue, list, isRadio]);
 
   const onBtnClick = (evt) => {
     evt.preventDefault();
@@ -347,25 +349,27 @@ export const AdminPanel = () => {
                   <p className="admin-panel__post-item-text">
                     {item.postTitle}
                   </p>
-                  <div className="admin-panel__buttons">
-                    <button
-                      data-type="false"
-                      data-id={item._id}
-                      onClick={onBtnClick}
-                      className="admin-panel_cancel-button"
-                    >
-                      Bekor qilish
-                    </button>
+                  {listStatus === "active" && listStatus === "rejected" && (
+                    <div className="admin-panel__buttons">
+                      <button
+                        data-type="false"
+                        data-id={item._id}
+                        onClick={onBtnClick}
+                        className="admin-panel_cancel-button"
+                      >
+                        Bekor qilish
+                      </button>
 
-                    <button
-                      data-type="true"
-                      data-id={item._id}
-                      onClick={onBtnClick}
-                      className="admin-panel__submit-button"
-                    >
-                      Tasdiqlash
-                    </button>
-                  </div>
+                      <button
+                        data-type="true"
+                        data-id={item._id}
+                        onClick={onBtnClick}
+                        className="admin-panel__submit-button"
+                      >
+                        Tasdiqlash
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <ul className="admin-panel__info-list">
                   <li className="admin-panel__info-item admin-panel__info-item-1">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Navbar = ({ style, navStyle, ulStyle }) => {
+export const Navbar = ({ style, navStyle, ulStyle, footer }) => {
   const token = localStorage.getItem("token");
   const userRole = localStorage.getItem("userRole");
 
@@ -24,6 +24,14 @@ export const Navbar = ({ style, navStyle, ulStyle }) => {
               : "Savol va javoblar"}
           </Link>
         </li>
+        {footer && (
+          <li className="navbar__list-item">
+            <Link to={"/login"} style={style} className="navbar__item-link">
+              Login
+              {/* Savol va javoblar */}
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

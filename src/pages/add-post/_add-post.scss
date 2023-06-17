@@ -232,6 +232,7 @@
   color: $white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  margin-right: 15px;
 
   &:hover {
     background: #01429cfe;
@@ -324,4 +325,9 @@
   line-height: 14px;
   color: $text-color;
   opacity: 0.4;
+}
+
+.add-post__button-wrapper {
+  display: flex;
+  align-items: center;
 }
