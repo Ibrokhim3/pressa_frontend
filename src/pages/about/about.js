@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { Container, Footer, Header, PageName } from "../../components";
-import rightIcon from "../../assets/icons/right.svg";
 
 export const About = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="about">
       <Header style={{ marginBottom: "42px" }}></Header>

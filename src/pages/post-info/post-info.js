@@ -34,6 +34,10 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 
 export const PostInfo = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   const { id } = useParams();
 
   let { list, loading, error } = useSelector((state) => state.posts);

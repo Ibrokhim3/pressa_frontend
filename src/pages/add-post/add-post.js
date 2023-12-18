@@ -25,6 +25,7 @@ export const AddPost = () => {
   const [inputValue, setInputValue] = useState("online");
   const [radioValue, setRadioValue] = useState("Jismoniy shaxs");
   const [file, setFile] = useState(null);
+  const [formError, setFormError] = useState("");
   // const [telInputValue, setTelInputValue] = useState("");
 
   const navigate = useNavigate();
@@ -92,22 +93,33 @@ export const AddPost = () => {
     evt.preventDefault();
     dispatch(postsAction.setLoading(true));
 
-    const {
-      inputDate: { value: postDate },
-      inputTime: { value: postTime },
-      dirSelect: { value: postDir },
-      innerDirSelect: { value: postInnerDir },
-      // inputLink: { value: postLink },
-      inputName: { value: speakerName },
-      // inputFirmTitle: { value: firmTitle },
-      inputJob: { value: speakerJob },
-      inputPhone: { value: speakerTelNum },
-      // inputAddPhone: { value: speakerTelNum2 },
-      inputTitle: { value: postTitle },
-      inputDesc: { value: postDesc },
-      inputTextarea: { value: postText },
-    } = evt.target;
+    // const {
+    //   inputDate: { value: postDate },
+    //   inputTime: { value: postTime },
+    //   dirSelect: { value: postDir },
+    //   innerDirSelect: { value: postInnerDir },
+    //   // inputLink: { value: postLink },
+    //   inputName: { value: speakerName },
+    //   // inputFirmTitle: { value: firmTitle },
+    //   inputJob: { value: speakerJob },
+    //   inputPhone: { value: speakerTelNum },
+    //   // inputAddPhone: { value: speakerTelNum2 },
+    //   inputTitle: { value: postTitle },
+    //   inputDesc: { value: postDesc },
+    //   inputTextarea: { value: postText },
+    // } = evt?.target || null;
 
+    //Can be dry
+    const postDate = evt.target.inputDate?.value;
+    const postTime = evt.target.inputTime?.value;
+    const postDir = evt.target.dirSelect?.value;
+    const postInnerDir = evt.target.innerDirSelect?.value;
+    const speakerName = evt.target.inputName?.value;
+    const speakerJob = evt.target.inputJob?.value;
+    const speakerTelNum = evt.target.inputPhone?.value;
+    const postTitle = evt.target.inputTitle?.value;
+    const postDesc = evt.target.inputDesc?.value;
+    const postText = evt.target.inputTextarea?.value;
     const postLink = evt.target.inputLink?.value;
     const firmTitle = evt.target.inputFirmTitle?.value;
     const speakerTelNum2 = evt.target.inputAddPhone?.value;
@@ -167,8 +179,8 @@ export const AddPost = () => {
         elModal.style.display = "block";
         navigate("/");
       })
-      .catch((err) => {
-        alert(err);
+      .catch(() => {
+        setFormError("All form inputs are required to fill!");
       })
       .finally(() => {
         dispatch(postsAction.setLoading(false));
@@ -222,16 +234,18 @@ export const AddPost = () => {
                     ))}
                   </Select>
                 </label>
-                <label className="post-form-label" htmlFor="innerDirSelect">
-                  Ichki yo’nalish
-                  <Select id={"innerDirSelect"}>
-                    {selectedCategory?.subCategory?.map((item, index) => (
-                      <option value={item} key={index}>
-                        {item}
-                      </option>
-                    ))}
-                  </Select>
-                </label>
+                {selectedCategory && (
+                  <label className="post-form-label" htmlFor="innerDirSelect">
+                    Ichki yo’nalish
+                    <Select id={"innerDirSelect"}>
+                      {selectedCategory?.subCategory?.map((item, index) => (
+                        <option value={item} key={index}>
+                          {item}
+                        </option>
+                      ))}
+                    </Select>
+                  </label>
+                )}
               </div>
               <div className="add-post__form-type-wrapper">
                 <label className="post-form-label post-form-label-1">
@@ -406,6 +420,7 @@ export const AddPost = () => {
                   placeholder="Mavzu matni"
                 ></textarea>
               </label>
+              <p className="add-post__error-text">{formError}</p>
               <div className="add-post__button-wrapper">
                 <Link to={"/"} className="add-post__form-cancel-button">
                   Bekor qilish

@@ -89,7 +89,7 @@
   &::-webkit-datetime-edit-fields-wrapper {
     // position: relative;
     z-index: 5;
-    width: 100%;
+    // width: 100%;
   }
 }
 
@@ -116,9 +116,9 @@
   left: -30px;
   cursor: pointer;
   bottom: 0;
+  position: absolute;
   height: auto;
   left: -30px;
-  position: absolute;
   right: 0;
   top: 5.5px;
   width: auto;

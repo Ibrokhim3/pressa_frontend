@@ -67,7 +67,7 @@
   padding: 17px 25px 17px 17px;
 }
 
-  .post-form-label {
+.post-form-label {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -201,6 +201,11 @@
   border-radius: 3px;
   background-color: rgba($color: $text-color, $alpha: 0.1);
   // resize: none;
+}
+
+.add-post__error-text {
+  color: red;
+  font-size: 12px;
 }
 
 .add-post__form-cancel-button {

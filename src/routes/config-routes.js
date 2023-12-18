@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useRoutes } from "react-router-dom";
 import {
   About,
@@ -8,12 +7,9 @@ import {
   MainPage,
   PostInfo,
 } from "../pages";
-import { userReducer } from "../store";
 
 const token = localStorage.getItem("token");
 const userRole = localStorage.getItem("userRole");
-
-console.log(userRole);
 
 const routes = [
   {
