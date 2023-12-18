@@ -190,6 +190,7 @@ export const SearchTool = ({ style }) => {
         {/*li ni component qilsa boladi*/}
         <li className="search-tool__item">
           {/*shu divni component qilsa boladi*/}
+
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
               // onChange={handleSearchDateChange}

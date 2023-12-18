@@ -57,9 +57,11 @@ export const MainPage = () => {
       });
   }, [limit, debouncedValue]);
 
+  if (loading) return <span className="loader"></span>;
+
   return (
     <div className="main-page__top">
-      {/* shu yerda padding 22px / variable qilsa boladi scss*/}
+      {/* can be paddding 22px / can be variable scss*/}
       <Header style={{ marginBottom: "calc(113px - 22px)" }}></Header>
       <Container style={{ marginBottom: "129px" }}>
         <TitleText style={{ marginBottom: "94px" }}>
@@ -67,27 +69,23 @@ export const MainPage = () => {
         </TitleText>
         <SearchTool style={{ marginBottom: "149px" }}></SearchTool>
         <main className="main-page__main">
-          {loading ? (
-            <div className="loader"></div>
-          ) : (
-            <section className="main-page__posts-list">
-              <p className="main-page__status-text">Oxirgi e’lonlar</p>
-              <ul className="main-page__post-list">
-                {list?.map((item, index) => (
-                  <Link to={`posts/${item._id}`}>
-                    <PostItem key={index} item={item}></PostItem>
-                  </Link>
-                ))}
-                {/* <PostItem /> */}
-              </ul>
-              <Button
-                onClick={() => setLimit(limit + 9)}
-                style={{ background: "#006AFF", margin: "0 auto" }}
-              >
-                Ko’proq ko’rish
-              </Button>
-            </section>
-          )}
+          <section className="main-page__posts-list">
+            <p className="main-page__status-text">Oxirgi e’lonlar</p>
+            <ul className="main-page__post-list">
+              {list?.map((item, index) => (
+                <Link to={`posts/${item._id}`}>
+                  <PostItem key={index} item={item}></PostItem>
+                </Link>
+              ))}
+              {/* <PostItem /> */}
+            </ul>
+            <Button
+              onClick={() => setLimit(limit + 9)}
+              style={{ background: "#006AFF", margin: "0 auto" }}
+            >
+              Ko’proq ko’rish
+            </Button>
+          </section>
 
           <section className="main-page__bottom-section">
             <div className="main-page__bottom-block">
