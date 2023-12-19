@@ -58,6 +58,7 @@ export const SearchTool = ({ style }) => {
         setNames(data);
       })
       .catch((err) => {
+        console.log(err);
         alert(err);
       });
   }, []);
@@ -85,9 +86,9 @@ export const SearchTool = ({ style }) => {
 
   // const ref = useOutsideClick(handleClickOutside);
 
-  const handleSearchDateChange = (evt) => {
-    dispatch(postsAction.setDateValue(evt.target.value));
-  };
+  // const handleSearchDateChange = (evt) => {
+  //   dispatch(postsAction.setDateValue(evt.target.value));
+  // };
 
   const categoryCheckHandler = (evt) => {
     const value = evt.target.value;
@@ -195,7 +196,7 @@ export const SearchTool = ({ style }) => {
               id="inputDate"
               className="search-tool__input-date search-tool__input-date-style"
               type="text"
-              placeholder="yyyy-mm-dd"
+              placeholder="Sanani kiriting"
             />
             {/* <IconTool style={{ marginLeft: "13px" }} src={calendarIcon}>
               22/02/2022

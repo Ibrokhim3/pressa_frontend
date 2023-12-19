@@ -83,12 +83,23 @@
   border: none;
   outline: none;
   position: relative;
-  width: 152px;
-  background-color: transparent;
-
-  // &::after {
-  //   content: attr(placeholder);
-  // }
+  //
+  color: #333333;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  //
+  width: 185px;
+  // width: 152px;
+  &::placeholder {
+    color: #333333;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    background: url("../../assets/icons/calendar.svg") no-repeat;
+    padding-left: 30px;
+    padding-top: -5px;
+  }
 
   // appearance: initial;
   // -webkit-appearance: initial;
