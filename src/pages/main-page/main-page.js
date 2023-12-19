@@ -55,7 +55,7 @@ export const MainPage = () => {
       });
   }, [limit, debouncedValue]);
 
-  if (loading) return <span className="loader"></span>;
+  // if (loading) return <span className="loader"></span>;
 
   return (
     <div className="main-page__top">

@@ -86,6 +86,10 @@
   width: 152px;
   background-color: transparent;
 
+  // &::after {
+  //   content: attr(placeholder);
+  // }
+
   // appearance: initial;
   // -webkit-appearance: initial;
   // width: 100%;

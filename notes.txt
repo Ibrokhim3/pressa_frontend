@@ -1,5 +1,4 @@
-Search icon in search input   
-time tag search tool da - main page
+  time tag search tool da - main page
 search-tool.js ul > li bolish kerakmi
 ul ni ichida span ishlatsa boladimi search tool ?
 line qalin bolib qolid 2.13px 1px bolish kerek ? top main page
@@ -41,6 +40,9 @@ token get-moderating-posts routinda ishlamadi
 search tool checkbox margin between list 65px 
 search tool icon tool semanti li ?
 input radio checked bosa ishlamayapti
+
+-19/12/2023
+-input type date on the main and add-post page doesn't receive style in safari ios
 
 
 
