@@ -84,15 +84,16 @@
   outline: none;
   position: relative;
   width: 152px;
+  background-color: transparent;
   // appearance: initial;
   // -webkit-appearance: initial;
   // width: 100%;
 
-  &::-webkit-datetime-edit-fields-wrapper {
-    z-index: 5;
-    // position: relative;
-    // width: 100%;
-  }
+  // &::-webkit-datetime-edit-fields-wrapper {
+  //   z-index: 5;
+  //   // position: relative;
+  //   // width: 100%;
+  // }
 }
 
 .search-tool__input-date::-webkit-calendar-picker-indicator {
@@ -111,6 +112,11 @@
   opacity: 1;
   display: block;
   background: url("../../assets/icons/calendar.svg") no-repeat;
+  //test code for safari
+  background-color: transparent;
+  background-image: url("../../assets/icons/calendar.svg");
+  background-size: auto;
+  //
   width: 25px;
   height: 25px;
   border-width: thin;
