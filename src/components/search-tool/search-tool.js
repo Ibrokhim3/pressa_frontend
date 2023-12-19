@@ -191,7 +191,7 @@ export const SearchTool = ({ style }) => {
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
               // onChange={handleSearchDateChange}
-              value={"yyyy-MM-dd"}
+              defaultValue={"yyyy-MM-dd"}
               id="inputDate"
               className="search-tool__input-date search-tool__input-date-style"
               type="date"
