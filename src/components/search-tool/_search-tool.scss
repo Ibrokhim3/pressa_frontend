@@ -111,11 +111,11 @@
   color: rgba(0, 0, 0, 0);
   opacity: 1;
   display: block;
-  background: url("../../assets/icons/calendar.svg") no-repeat;
+  // background: url("../../assets/icons/calendar.svg") no-repeat;
   //test code for safari
   background-color: transparent;
   background-image: url("../../assets/icons/calendar.svg");
-  background-size: auto;
+  background-size: contain;
   //
   width: 25px;
   height: 25px;
@@ -125,10 +125,10 @@
   cursor: pointer;
   bottom: 0;
   position: absolute;
-  height: auto;
   left: -30px;
   right: 0;
   top: 5.5px;
+  height: auto;
   width: auto;
 }
 
