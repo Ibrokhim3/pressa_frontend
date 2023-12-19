@@ -22,11 +22,9 @@ import personInSuit2Webp2x from "../../assets/images/img-bottom2@2x.webp";
 import { useDebounce } from "../../hooks/useDebounce";
 import { postsAction } from "../../store/posts";
 import { API_URL } from "../../variables";
-import { Link } from "react-router-dom";
 
 export const MainPage = () => {
-  const { list, loading, error, searchValue, dateValue, checkboxDirValue } =
-    useSelector((state) => state.posts);
+  const { list, loading, searchValue } = useSelector((state) => state.posts);
 
   const [limit, setLimit] = useState(9);
 

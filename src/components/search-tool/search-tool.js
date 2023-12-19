@@ -1,16 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import calendarIcon from "../../assets/icons/calendar.svg";
 import categoryIcon from "../../assets/icons/category.svg";
 import isOnlineIcon from "../../assets/icons/online.svg";
 import profileIcon from "../../assets/icons/profile.svg";
-import { useOutsideClick } from "../../hooks";
 import { postsAction } from "../../store";
 import { API_URL } from "../../variables";
-
+import { format } from "date-fns";
 import { ArrowDown } from "../arrow-down";
 import { Checkbox } from "../checkbox";
-
 import { IconTool } from "../icon-tool";
 import { InputRadio } from "../input-radio";
 
@@ -194,6 +191,7 @@ export const SearchTool = ({ style }) => {
           <label htmlFor="inputDate" className="search-tool__item-wrapper">
             <input
               // onChange={handleSearchDateChange}
+              value={"yyyy-MM-dd"}
               id="inputDate"
               className="search-tool__input-date search-tool__input-date-style"
               type="date"

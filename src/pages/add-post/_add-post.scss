@@ -43,12 +43,14 @@
   line-height: 17px;
   border: none;
   outline: none;
+  max-width: 150px;
   appearance: initial;
   -webkit-appearance: initial;
 }
 
 .add-post__input-date-1 {
   margin-left: 40px;
+  max-width: 105px;
 }
 
 //select option
