@@ -84,11 +84,13 @@
   outline: none;
   position: relative;
   width: 152px;
+  appearance: initial;
+  -webkit-appearance: initial;
   // width: 100%;
 
   &::-webkit-datetime-edit-fields-wrapper {
-    // position: relative;
     z-index: 5;
+    // position: relative;
     // width: 100%;
   }
 }

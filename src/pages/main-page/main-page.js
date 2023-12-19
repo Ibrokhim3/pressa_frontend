@@ -73,9 +73,9 @@ export const MainPage = () => {
             <p className="main-page__status-text">Oxirgi e’lonlar</p>
             <ul className="main-page__post-list">
               {list?.map((item, index) => (
-                <Link to={`posts/${item._id}`}>
-                  <PostItem key={index} item={item}></PostItem>
-                </Link>
+                // <Link to={`posts/${item._id}`}>
+                <PostItem key={index} item={item}></PostItem>
+                // </Link>
               ))}
               {/* <PostItem /> */}
             </ul>

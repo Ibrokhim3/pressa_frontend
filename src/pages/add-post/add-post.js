@@ -7,9 +7,7 @@ import {
   Header,
   InputRadio,
   InputText,
-  Option,
   PageName,
-  PostInput,
   Select,
 } from "../../components";
 import { postsAction } from "../../store";
@@ -18,7 +16,7 @@ import { API_URL } from "../../variables";
 export const AddPost = () => {
   const elModal = document.querySelector(".add-post__modal");
 
-  const { list, loading, error } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
 
   const [options, setOptions] = useState(null);
   const [direction, setDirection] = useState(null);
