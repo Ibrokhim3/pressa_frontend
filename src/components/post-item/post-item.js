@@ -38,109 +38,111 @@ export const PostItem = ({
           className="post-item__post-img"
           src={postImgUrl}
           alt="post-image"
-          maxWidth={407}
+          // maxWidth={407}
           height={417}
         />
         <div className="post-item__body">
           <h3 className="post-item__title">{postTitle}</h3>
           <div className="post-item__list-wrapper">
             <table className="post-item__table">
-              <tr>
-                <td>
-                  <IconTool
-                    iconStyle={{
-                      marginBottom: "20px",
-                    }}
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={profileIcon}
-                  >
-                    {speakerName}
-                  </IconTool>
-                </td>
-                <td>
-                  <IconTool
-                    iconStyle={{
-                      marginBottom: "20px",
-                    }}
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={jobIcon}
-                  >
-                    {speakerJob}
-                  </IconTool>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <IconTool
-                    iconStyle={{
-                      marginBottom: "20px",
-                    }}
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={calendarIcon}
-                  >
-                    {postDate}
-                  </IconTool>
-                </td>
-                <td>
-                  <IconTool
-                    iconStyle={{
-                      marginBottom: "20px",
-                    }}
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={timeIcon}
-                  >
-                    {postTime}
-                  </IconTool>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <IconTool
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={onlineIcon}
-                  >
-                    {postType}
-                  </IconTool>
-                </td>
-                <td>
-                  <IconTool
-                    style={{
-                      fontSize: "18px",
-                      lineHeight: "21px",
-                      marginLeft: "13px",
-                      width: "118px",
-                    }}
-                    src={eyeIcon}
-                  >
-                    100
-                  </IconTool>
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>
+                    <IconTool
+                      iconStyle={{
+                        marginBottom: "20px",
+                      }}
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={profileIcon}
+                    >
+                      {speakerName}
+                    </IconTool>
+                  </td>
+                  <td>
+                    <IconTool
+                      iconStyle={{
+                        marginBottom: "20px",
+                      }}
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={jobIcon}
+                    >
+                      {speakerJob}
+                    </IconTool>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <IconTool
+                      iconStyle={{
+                        marginBottom: "20px",
+                      }}
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={calendarIcon}
+                    >
+                      {postDate}
+                    </IconTool>
+                  </td>
+                  <td>
+                    <IconTool
+                      iconStyle={{
+                        marginBottom: "20px",
+                      }}
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={timeIcon}
+                    >
+                      {postTime}
+                    </IconTool>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <IconTool
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={onlineIcon}
+                    >
+                      {postType}
+                    </IconTool>
+                  </td>
+                  <td>
+                    <IconTool
+                      style={{
+                        fontSize: "18px",
+                        lineHeight: "21px",
+                        marginLeft: "13px",
+                        width: "118px",
+                      }}
+                      src={eyeIcon}
+                    >
+                      100
+                    </IconTool>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

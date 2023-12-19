@@ -15,7 +15,7 @@ export const InputRadio = ({
   return (
     <ul style={style} className="radio-list">
       <li className="radio-item">
-        <label for="radio1" className="radio-text">
+        <label htmlFor="radio1" className="radio-text">
           {label1}
         </label>
 
@@ -31,7 +31,7 @@ export const InputRadio = ({
         />
       </li>
       <li className="radio-item">
-        <label for="radio2" className="radio-text">
+        <label htmlFor="radio2" className="radio-text">
           {label2}
         </label>
         {postType && <img src={offLineIcon} alt="offline" />}
