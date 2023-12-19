@@ -27,17 +27,6 @@ export const SearchTool = ({ style }) => {
     useSelector((state) => state.posts);
 
   useEffect(() => {
-    const inputDate = document.getElementById("inputDate");
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-    if (isSafari) {
-      inputDate.setAttribute("placeholder", "yyyy-mm-dd");
-    } else {
-      inputDate.setAttribute("placeholder", "dd.mm.yyyy");
-    }
-  }, []);
-
-  useEffect(() => {
     fetch(`${API_URL}/get-categories`, {})
       .then((res) => {
         if (res.status !== 200) {
