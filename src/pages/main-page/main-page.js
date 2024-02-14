@@ -119,7 +119,7 @@ export const MainPage = () => {
           </section>
         </main>
       </Container>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

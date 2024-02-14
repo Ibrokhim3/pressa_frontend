@@ -7,8 +7,11 @@
 
 .search-tool__list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 25px 0px 25px 57px;
-  gap: 60px;
+  column-gap: 60px;
+  row-gap: 20px;
 }
 
 .search-tool__item {
@@ -71,7 +74,7 @@
     height: 100px;
     opacity: 0.2;
     left: calc(100% + 30px);
-    border: 1px solid $text-color;
+    // border: 1px solid $text-color;
   }
 }
 
@@ -198,4 +201,19 @@
 
 .search-tool__item-wrapper-type-wrapper-show {
   display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  .search-tool {
+    flex-direction: column;
+  }
+
+  .search-tool__button {
+    margin-left: 0;
+    width: 100%;
+    padding: 38px 52px;
+    background: $accent-color;
+    border-radius: 0 0 10px 10px;
+    border: 0;
+  }
 }

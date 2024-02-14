@@ -1,16 +1,15 @@
-.post-item__list {
-  // display: flex;
-  // margin-bottom: 20px;
-}
-
 .post-item__list-2 {
   margin-left: auto;
+}
+
+.post-item-wrapper {
+  max-width: 407px;
 }
 
 .post-item {
   height: 692px;
   width: 100%;
-  max-width: 407px;
+  // max-width: 407px;
   display: flex;
   flex-direction: column;
   // border: 1px solid rgba(51, 51, 51, 0.2);
@@ -20,7 +19,8 @@
 
 .post-item__post-img {
   // margin-bottom: 20px;
-
+  width: 100%;
+  border: 1px solid rgba(51, 51, 51, 0.2);
   object-fit: cover;
   border-radius: 5px 5px 0px 0px;
 }
@@ -43,7 +43,7 @@
 
 .post-item__title {
   margin: 0;
-  width: 377px;
+  max-width: 377px;
   font-weight: 600;
   line-height: 34px;
   color: $text-color;

@@ -28,7 +28,7 @@ export const PostItem = ({
   },
 }) => {
   return (
-    <li>
+    <li className="post-item-wrapper">
       <Link
         className="post-item
       "

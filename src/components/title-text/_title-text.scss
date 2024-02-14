@@ -1,9 +1,16 @@
 .title-text {
   margin: 0 auto;
-  width: 840px;
+  max-width: 840px;
+  text-align: center;
   font-weight: 600;
   font-size: 64px;
   line-height: 79px;
-  text-align: center;
   color: $white;
+}
+
+@media only screen and (max-width: 489px) {
+  .title-text {
+    font-size: 45px;
+    line-height: 1.2;
+  }
 }

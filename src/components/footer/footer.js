@@ -16,35 +16,39 @@ export const Footer = () => {
           </Link>
           <Navbar
             footer={true}
-            ulStyle={{ gap: "77px" }}
+            ulStyle={{ columnGap: "77px" }}
             style={{ fontWeight: "500" }}
+            navStyle={{ marginLeft: 20 }}
           ></Navbar>
-
-          <img
-            className="footer__phone-icon"
-            src={phoneIcon}
-            alt="phone-number"
-          />
-          <a href="tel:+71 200-11-02" className="footer__number">
-            +71 200-11-02
-          </a>
-          <ul className="footer__share-list">
-            <li className="footer__share-item">
-              <a href="#">
-                <img src={facebookIcon} alt="facebook" />
+          <div className="footer__phone-link-wrapper">
+            <div className="footer__phone-wrapper">
+              <img
+                className="footer__phone-icon"
+                src={phoneIcon}
+                alt="phone-number"
+              />
+              <a href="tel:+71 200-11-02" className="footer__number">
+                +71 200-11-02
               </a>
-            </li>
-            <li className="footer__share-item">
-              <a href="#">
-                <img src={instaIcon} alt="instagram" />
-              </a>
-            </li>
-            <li className="footer__share-item">
-              <a href="#">
-                <img src={telegIcon} alt="telegram" />
-              </a>
-            </li>
-          </ul>
+            </div>
+            <ul className="footer__share-list">
+              <li className="footer__share-item">
+                <a href="#">
+                  <img src={facebookIcon} alt="facebook" />
+                </a>
+              </li>
+              <li className="footer__share-item">
+                <a href="#">
+                  <img src={instaIcon} alt="instagram" />
+                </a>
+              </li>
+              <li className="footer__share-item">
+                <a href="#">
+                  <img src={telegIcon} alt="telegram" />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </Container>
     </footer>
