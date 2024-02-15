@@ -12,6 +12,9 @@
 }
 .footer__wrapper {
   @include flex-centring;
+  flex-wrap: wrap;
+  justify-content: initial;
+  row-gap: 40px;
 }
 
 .footer__number {
@@ -48,6 +51,12 @@
 
 @media only screen and (max-width: 1003px) {
   .footer__phone-wrapper {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 585px) {
+  .footer__logo {
     margin-left: 15px;
   }
 }

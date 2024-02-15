@@ -34,26 +34,26 @@ export const Header = ({ style }) => {
               type="search"
             />
           </label>
-        <div className="header__nav-button-wrapper">
-          <Navbar
-            ulStyle={{ columnGap: "40px" }}
-            navStyle={{
-              //  marginLeft: "auto",
-                marginRight: 20 }}
-          ></Navbar>
-          <Button
-            to={"/add-post"}
-            style={{
-              marginLeft: "auto",
-              width: "100%",
-              maxWidth: "160px",
-              padding: "15px 0",
-            }}
-          >
-            <img src={plusImg} alt="plus" />
-            E’lon berish
-          </Button>
-        </div>
+          <div className="header__nav-btn-wrapper">
+            <Navbar
+              ulStyle={{ columnGap: "40px" }}
+              navStyle={{
+                marginRight: 20,
+              }}
+            ></Navbar>
+            <Button
+              to={"/add-post"}
+              style={{
+                marginLeft: "auto",
+                width: "100%",
+                maxWidth: "160px",
+                padding: "15px 15px",
+              }}
+            >
+              <img src={plusImg} alt="plus" />
+              E’lon berish
+            </Button>
+          </div>
         </div>
       </Container>
     </header>

@@ -6,7 +6,10 @@ export const Navbar = ({ style, navStyle, ulStyle, footer }) => {
 
   return (
     <nav style={navStyle}>
-      <ul style={ulStyle} className="navbar__list">
+      <ul
+        style={ulStyle}
+        className={`${footer ? "navbar__list-footer" : "navbar__list"} `}
+      >
         <li className="navbar__list-item">
           <Link to={"/about"} style={style} className="navbar__item-link">
             Biz haqimizda

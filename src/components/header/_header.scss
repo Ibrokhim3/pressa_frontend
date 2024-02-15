@@ -64,21 +64,21 @@
   margin-left: 10px;
 }
 
-.header__nav-button-wrapper {
-  margin-left: auto;
+.header__nav-btn-wrapper {
   display: flex;
+  align-items: center;
+  margin-left: auto;
   justify-content: space-between;
 }
 
-@media only screen and (max-width: 896px) {
-  .header__nav-button-wrapper {
-    margin-left: initial;
+@media only screen and (max-width: 925px) {
+  .header__nav-btn-wrapper {
+    margin-left: 0;
     width: 100%;
-    align-items: center;
-    // display: flex;
-    // justify-content: space-between;
   }
+}
 
+@media only screen and (max-width: 896px) {
   .header__search-input-label {
     margin-right: 0;
   }

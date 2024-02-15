@@ -1,4 +1,5 @@
-.navbar__list {
+.navbar__list,
+.navbar__list-footer {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -8,13 +9,16 @@
   justify-content: start;
 }
 
-.navbar__list-item {
-  // padding: 0;
-}
-
 .navbar__item-link {
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   color: #ffffff;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 489px) {
+  .navbar__list {
+    flex-wrap: nowrap;
+  }
 }
